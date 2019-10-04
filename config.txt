@@ -1,0 +1,2 @@
+@tempr.email
+2 captcha api key
