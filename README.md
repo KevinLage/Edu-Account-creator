@@ -1,10 +1,10 @@
 # Edu Account creator
 
-# Why should i need it?
+## Why should i need it?
 
-To mass create student email 
+With this tool you can generate many studentmails (.edu mail) 
 
-For those who might not know the benefits of edu email:- 
+For those who might not know the benefits of edu email: 
 
 1. Free amazon prime for 6 months
 2. Unlimited Google Drive (most useful of pirates like you and me)
