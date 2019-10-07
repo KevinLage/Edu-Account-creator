@@ -3,6 +3,7 @@ import random
 import string
 import time
 import requests
+import platform
 from selenium import webdriver
 from selenium.webdriver.common.by import By
 from selenium.webdriver.common.keys import Keys
@@ -45,7 +46,7 @@ def Bot(collage,use_captcha):
         return ''.join(random.choice(chars) for i in range(size))
 
 
-    driver = webdriver.Firefox(executable_path= "./geckodriver")
+    driver = webdriver.Firefox(executable_path=geckopath)
 
     driver.get("https://www.openccc.net/uPortal/p/AccountCreation.ctf1/max/render.uP?pP_execution=e1s2")
 
@@ -97,7 +98,7 @@ def Bot(collage,use_captcha):
 
 
 
-    email = randomPassword() + mail
+    email = randomName() + mail
     driver.find_element_by_id("inputEmail").send_keys(email)
     driver.find_element_by_id("inputEmailConfirm").send_keys(email)
     time.sleep(4)
@@ -210,7 +211,7 @@ def Solano(name,pw,number,email):
     global generated
     global accounts
 
-    driver = webdriver.Firefox(executable_path= "./geckodriver")
+    driver = webdriver.Firefox(executable_path= geckopath)
     driver.get("https://www.opencccapply.net/uPortal/f/u63l1s1000/normal/render.uP")
     time.sleep(1)
     driver.find_element_by_id("portal-sign-in-link").click()
@@ -337,7 +338,7 @@ def ccsf(name,pw,number,email):
     global generated
     global accounts
 
-    driver = webdriver.Firefox(executable_path= "./geckodriver")
+    driver = webdriver.Firefox(executable_path= geckopath)
     driver.get("https://www.opencccapply.net/uPortal/f/u63l1s1000/normal/render.uP")
     time.sleep(1)
     driver.find_element_by_id("portal-sign-in-link").click()
@@ -472,7 +473,7 @@ def San_Bernardino(name,pw,number,email):
     global generated
     global accounts
 
-    driver = webdriver.Firefox(executable_path= "./geckodriver")
+    driver = webdriver.Firefox(executable_path= geckopath)
     driver.get("https://www.opencccapply.net/uPortal/f/u63l1s1000/normal/render.uP")
     time.sleep(1)
     driver.find_element_by_id("portal-sign-in-link").click()
@@ -618,7 +619,7 @@ def Crafton(name,pw,number,email):
     global generated
     global accounts
 
-    driver = webdriver.Firefox(executable_path= "./geckodriver")
+    driver = webdriver.Firefox(executable_path= geckopath)
     driver.get("https://www.opencccapply.net/uPortal/f/u63l1s1000/normal/render.uP")
     time.sleep(1)
     driver.find_element_by_id("portal-sign-in-link").click()
@@ -765,7 +766,7 @@ def San_Bernardino(name,pw,number,email):
     global generated
     global accounts
 
-    driver = webdriver.Firefox(executable_path= "./geckodriver")
+    driver = webdriver.Firefox(executable_path= geckopath)
     driver.get("https://www.opencccapply.net/uPortal/f/u63l1s1000/normal/render.uP")
     time.sleep(1)
     driver.find_element_by_id("portal-sign-in-link").click()
@@ -912,7 +913,7 @@ def Santa_Monica(name,pw,number,email):
 
 
 
-    driver = webdriver.Firefox(executable_path= "./geckodriver")
+    driver = webdriver.Firefox(executable_path= geckopath)
     driver.get("https://www.opencccapply.net/uPortal/f/u63l1s1000/normal/render.uP")
     time.sleep(1)
     driver.find_element_by_id("portal-sign-in-link").click()
@@ -1055,7 +1056,7 @@ def Coastline(name,pw,number,email):
 
 
 
-    driver = webdriver.Firefox(executable_path= "./geckodriver")
+    driver = webdriver.Firefox(executable_path= geckopath)
     driver.get("https://www.opencccapply.net/uPortal/f/u63l1s1000/normal/render.uP")
 
     driver.find_element_by_id("portal-sign-in-link").click()
@@ -1229,12 +1230,15 @@ def Coastline(name,pw,number,email):
     time.sleep(3)
     generated += 1
     print(generated , "/" , accounts , " Accounts are done!")
-    with open("accounts.txt", "a+") as file:
+    with open("accountsb.txt", "a+") as file:
         file.write(name + ":" + pw)
         file.write(" Email:" + email)
         file.write("\n")
 
-
+if platform.system() == "Windows": #checking OS
+    geckopath = "./geckodriver.exe"
+else:
+    geckopath = "./geckodriver"
 
 
 print("""""
@@ -1256,7 +1260,6 @@ by Exploit
 
 """""                                                                                                             
 )
-
 
 
 accounts = int(input("How many Accounts do u want?\n"))
