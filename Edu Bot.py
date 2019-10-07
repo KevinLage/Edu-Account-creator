@@ -1076,7 +1076,6 @@ def Coastline(name,pw,number,email):
         pass
 
     collage = Select(driver.find_element_by_id('inputCollegeId'))
-    time.sleep(4838)
     collage.select_by_value('233')
     driver.find_element_by_id("beginApplicationButton").click()
     time.sleep(4)
