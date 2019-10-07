@@ -1,5 +1,9 @@
 # Edu Account creator
 
+## How to use?
+1. Install Firefox (https://www.mozilla.org/en-US/firefox/new/)
+2. Download Geckodriver (https://github.com/mozilla/geckodriver/releases)
+
 ## Why should i need it?
 
 With this tool you can generate many studentmails (.edu mail) 
