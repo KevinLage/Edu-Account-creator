@@ -1230,19 +1230,12 @@ def Coastline(name,pw,number,email):
     time.sleep(3)
     generated += 1
     print(generated , "/" , accounts , " Accounts are done!")
-    with open("accountsb.txt", "a+") as file:
+    with open("accounts.txt", "a+") as file:
         file.write(name + ":" + pw)
         file.write(" Email:" + email)
         file.write("\n")
 
-url = "https://pastebin.com/raw/833mvJDa"
-r = requests.get(url)
-if r.text == "1":
-    print("Update the tool!")
-    time.sleep(3)
-    exit()
-else:
-	pass
+
 
 
 print("""""
