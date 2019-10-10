@@ -24,9 +24,12 @@ def Bot(collage,use_captcha):
     global generated
     global accounts
 
-    
-    config = open("config.txt", "r+").readlines()
-    mail = config[0]
+    try:
+        config = open("config.txt", "r+").readlines()
+        mail = config[0]
+    except:
+        mail = "@tempr.email"
+        pass
     try:
         captcha = config[1]
         captcha, gay = captcha.split("\n")
@@ -639,7 +642,6 @@ def Crafton(name,pw,number,email):
 
         pass
 #collage auswahl
-    time.sleep(39000)
     collage = Select(driver.find_element_by_id('inputCollegeId'))
     collage.select_by_value('981')
     driver.find_element_by_id("beginApplicationButton").click()
@@ -1081,9 +1083,9 @@ def Coastline(name,pw,number,email):
     driver.find_element_by_id("beginApplicationButton").click()
     time.sleep(4)
     driver.find_elements_by_tag_name("option")[1].click()
-    driver.find_elements_by_tag_name("option")[3].click()
     time.sleep(1)
-
+    collage = Select(driver.find_element_by_id('inputEduGoal'))
+    collage.select_by_value('F')
     time.sleep(1.5)
     driver.find_elements_by_tag_name("option")[25].click()
     driver.find_element_by_name("_eventId_continue").click()
