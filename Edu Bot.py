@@ -13,11 +13,11 @@ from selenium.webdriver.support.ui import WebDriverWait
 
 generated = 0
 
-def createaccount(collage):
+def createaccount(collage,use_captcha):
     try:
         Bot(collage, use_captcha)
     except:
-        createaccount(collage)
+        createaccount(collage, use_captcha)
 
 
 def Bot(collage,use_captcha):
@@ -205,10 +205,281 @@ def Bot(collage,use_captcha):
         Solano(name,pw,number,email)
     elif collage == "7":
         ccsf(name,pw,number,email)
+    elif collage == "8":
+        Canada(name,pw,number,email)
+    elif collage == "9":
+        Barbara(name,pw,number,email)
     else:
         print("Fuck")
         exit()
 
+def Barbara(name,pw,number,email):
+    global generated
+    global accounts
+
+    driver = webdriver.Firefox(executable_path= geckopath)
+    driver.get("https://www.opencccapply.net/uPortal/f/u63l1s1000/normal/render.uP")
+    time.sleep(1)
+    driver.find_element_by_id("portal-sign-in-link").click()
+    driver.find_element_by_id("inputJUsername").send_keys(name)
+    time.sleep(1)
+    driver.find_element_by_id("inputJPassword").send_keys(pw)
+    driver.find_element_by_name("_eventId_proceed").click()
+    time.sleep(3)
+    try:
+        driver.find_elements_by_css_selector(".btn-primary")[3].click()
+        time.sleep(1)
+
+        driver.find_element_by_id("delete-confirmation-ok-button").click()
+        time.sleep(4.5)
+    except:
+        time.sleep(3)
+        pass
+#collage auswahl
+    collage = Select(driver.find_element_by_id('inputCollegeId'))
+    collage.select_by_value('651')
+    driver.find_element_by_id("beginApplicationButton").click()
+    time.sleep(4)
+#enrollment
+    driver.find_elements_by_tag_name("option")[1].click()
+    time.sleep(0.5)
+    collage = Select(driver.find_element_by_id('inputEduGoal'))
+    collage.select_by_value('F')
+    time.sleep(1)
+    driver.find_elements_by_tag_name("option")[25].click()
+    driver.find_element_by_name("_eventId_continue").click()
+    time.sleep(2)
+#account info
+    driver.find_element_by_id("inputHomelessNoMailingAddress").click()
+    time.sleep(1)
+    driver.find_element_by_id("homelessNoCurrentMailingAddress-confirm-yes").click()
+    driver.find_element_by_id("homelessNoCurrentMailingAddressConfirmationDialog-modal-ok-button").click()
+    time.sleep(0.5)
+    driver.find_element_by_name("_eventId_continue").click()
+#education
+    driver.find_elements_by_tag_name("option")[1].click()
+    time.sleep(1)
+    driver.find_elements_by_tag_name("option")[9].click()
+    driver.find_element_by_id("inputHsAttendance3").click()
+    driver.find_element_by_name("_eventId_continue").click()
+#military
+    driver.find_elements_by_tag_name("option")[1].click()
+    time.sleep(1)
+    s2 = Select(driver.find_element_by_id('inputMilitaryStatus'))
+    s2.select_by_value('1')
+    time.sleep(4.5)
+    driver.find_element_by_name("_eventId_continue").click()
+    driver.find_element_by_id("inputCaRes2YearsYes").click()
+    driver.find_element_by_id("inputIsEverInFosterCareNo").click()
+    time.sleep(4.5)
+    driver.find_element_by_name("_eventId_continue").click()
+#needs
+    driver.find_element_by_id("inputEnglishYes").click()
+    driver.find_element_by_id("inputFinAidInfoNo").click()
+    time.sleep(1)
+    driver.find_element_by_id("inputAssistanceNo").click()
+    driver.find_element_by_id("inputAthleticInterest3").click()
+    time.sleep(1)
+    driver.find_element_by_name("_eventId_continue").click()
+#demographic
+    gender = Select(driver.find_element_by_id('inputGender'))
+    gender.select_by_value('Male')
+    time.sleep(1)
+
+    trans = Select(driver.find_element_by_id('inputTransgender'))
+    trans.select_by_value('No')
+    time.sleep(4.5)
+    sexual = Select(driver.find_element_by_id('inputOrientation'))
+    sexual.select_by_value('StraightHetrosexual')
+
+    guard = Select(driver.find_element_by_id('inputParentGuardianEdu1'))
+    guard.select_by_value('3')
+    time.sleep(1.5)
+    guard2 = Select(driver.find_element_by_id('inputParentGuardianEdu2'))
+    guard2.select_by_value('Y')
+
+    driver.find_element_by_id("inputHispanicNo").click()
+
+    driver.find_element_by_id("inputRaceEthnicity800").click()
+    time.sleep(4.5)
+    driver.find_element_by_id("inputRaceEthnicity806").click()
+    time.sleep(1.5)
+    driver.find_element_by_name("_eventId_continue").click()
+    time.sleep(1.5)
+#supplemental
+
+    supp1 = Select(driver.find_element_by_id('_supp_MENU_1'))
+    supp1.select_by_value('15')
+
+    supp2 = Select(driver.find_element_by_id('_supp_MENU_2'))
+    supp2.select_by_value('01')
+    time.sleep(1.5)
+
+    supp3 = Select(driver.find_element_by_id('_supp_MENU_3'))
+    supp3.select_by_value('7')
+    time.sleep(1.5)
+    supp5 = Select(driver.find_element_by_id('_supp_MENU_5'))
+    supp5.select_by_value('Y')
+
+    supp4 = Select(driver.find_element_by_id('_supp_MENU_4'))
+    supp4.select_by_value('N')
+
+    driver.find_element_by_name("_eventId_continue").click()
+    time.sleep(1.5)
+
+#submisson
+
+    time.sleep(4.5)
+    driver.find_element_by_id("inputConsentYes").click()
+    time.sleep(3)
+
+    driver.find_element_by_id("inputESignature").click()
+    driver.find_element_by_id("inputFinancialAidAck").click()
+    print("[*] Sleeping 25 seconds!")
+    time.sleep(25)
+    driver.find_element_by_id("submit-application-button").click()
+    time.sleep(5)
+    driver.find_element_by_name("_eventId_finish").click()
+    time.sleep(1)
+
+    driver.find_element_by_id("inputEnglishSatisfied").click()
+    driver.find_element_by_id("RecommendYes").click()
+    driver.find_element_by_name("_eventId_submit").click()
+
+    time.sleep(1)
+    driver.quit()
+    time.sleep(3)
+    generated += 1
+    print(generated , "/" , accounts , " Accounts are done!")
+    with open("accountsb.txt", "a+") as file:
+        file.write(name + ":" + pw)
+        file.write("  Email:" + email)
+        file.write("\n")
+
+
+def Canada(name,pw,number,email):
+    global generated
+    global accounts
+
+    driver = webdriver.Firefox(executable_path= geckopath)
+    driver.get("https://www.opencccapply.net/uPortal/f/u63l1s1000/normal/render.uP")
+    time.sleep(1)
+    driver.find_element_by_id("portal-sign-in-link").click()
+    driver.find_element_by_id("inputJUsername").send_keys(name)
+    time.sleep(1)
+    driver.find_element_by_id("inputJPassword").send_keys(pw)
+    driver.find_element_by_name("_eventId_proceed").click()
+    time.sleep(3)
+    try:
+        driver.find_elements_by_css_selector(".btn-primary")[3].click()
+        time.sleep(1)
+
+        driver.find_element_by_id("delete-confirmation-ok-button").click()
+        time.sleep(4.5)
+    except:
+        time.sleep(3)
+        pass
+#collage auswahl
+
+    collage = Select(driver.find_element_by_id('inputCollegeId'))
+    collage.select_by_value('371')
+    driver.find_element_by_id("beginApplicationButton").click()
+    time.sleep(4)
+#enrollment
+    driver.find_elements_by_tag_name("option")[1].click()
+    time.sleep(0.5)
+    collage = Select(driver.find_element_by_id('inputEduGoal'))
+    collage.select_by_value('F')
+    time.sleep(1)
+    driver.find_elements_by_tag_name("option")[25].click()
+    driver.find_element_by_name("_eventId_continue").click()
+    time.sleep(2)
+#account info
+    driver.find_element_by_id("inputHomelessNoMailingAddress").click()
+    time.sleep(1)
+    driver.find_element_by_id("homelessNoCurrentMailingAddress-confirm-yes").click()
+    driver.find_element_by_id("homelessNoCurrentMailingAddressConfirmationDialog-modal-ok-button").click()
+    time.sleep(0.5)
+    driver.find_element_by_name("_eventId_continue").click()
+#education
+    driver.find_elements_by_tag_name("option")[1].click()
+    time.sleep(1)
+    driver.find_elements_by_tag_name("option")[9].click()
+    driver.find_element_by_id("inputHsAttendance3").click()
+    driver.find_element_by_name("_eventId_continue").click()
+#military
+    driver.find_elements_by_tag_name("option")[1].click()
+    time.sleep(1)
+    s2 = Select(driver.find_element_by_id('inputMilitaryStatus'))
+    s2.select_by_value('1')
+    time.sleep(4.5)
+    driver.find_element_by_name("_eventId_continue").click()
+    driver.find_element_by_id("inputCaRes2YearsYes").click()
+    driver.find_element_by_id("inputIsEverInFosterCareNo").click()
+    time.sleep(4.5)
+    driver.find_element_by_name("_eventId_continue").click()
+#needs
+    driver.find_element_by_id("inputEnglishYes").click()
+    driver.find_element_by_id("inputFinAidInfoNo").click()
+    time.sleep(1)
+    driver.find_element_by_id("inputAssistanceNo").click()
+    driver.find_element_by_id("inputAthleticInterest3").click()
+    time.sleep(1)
+    driver.find_element_by_name("_eventId_continue").click()
+#demographic
+    gender = Select(driver.find_element_by_id('inputGender'))
+    gender.select_by_value('Male')
+    time.sleep(1)
+
+    trans = Select(driver.find_element_by_id('inputTransgender'))
+    trans.select_by_value('No')
+    time.sleep(4.5)
+    sexual = Select(driver.find_element_by_id('inputOrientation'))
+    sexual.select_by_value('StraightHetrosexual')
+
+    guard = Select(driver.find_element_by_id('inputParentGuardianEdu1'))
+    guard.select_by_value('3')
+    time.sleep(1.5)
+    guard2 = Select(driver.find_element_by_id('inputParentGuardianEdu2'))
+    guard2.select_by_value('Y')
+
+    driver.find_element_by_id("inputHispanicNo").click()
+
+    driver.find_element_by_id("inputRaceEthnicity800").click()
+    time.sleep(4.5)
+    driver.find_element_by_id("inputRaceEthnicity806").click()
+    time.sleep(1.5)
+    driver.find_element_by_name("_eventId_continue").click()
+    time.sleep(1.5)
+
+#submisson
+
+    time.sleep(4.5)
+    driver.find_element_by_id("inputConsentYes").click()
+    time.sleep(3)
+
+    driver.find_element_by_id("inputESignature").click()
+    driver.find_element_by_id("inputFinancialAidAck").click()
+    print("[*] Sleeping 25 secounds!")
+    time.sleep(25)
+    driver.find_element_by_id("submit-application-button").click()
+    time.sleep(5)
+    driver.find_element_by_name("_eventId_finish").click()
+    time.sleep(1)
+
+    driver.find_element_by_id("inputEnglishSatisfied").click()
+    driver.find_element_by_id("RecommendYes").click()
+    driver.find_element_by_name("_eventId_submit").click()
+
+    time.sleep(1)
+    driver.quit()
+    time.sleep(3)
+    generated += 1
+    print(generated , "/" , accounts , " Accounts are done!")
+    with open("accountsb.txt", "a+") as file:
+        file.write(name + ":" + pw)
+        file.write("  Email:" + email)
+        file.write("\n")
 
 def Solano(name,pw,number,email):
     global generated
@@ -231,8 +502,8 @@ def Solano(name,pw,number,email):
         time.sleep(4.5)
     except:
         time.sleep(3)
-
         pass
+
 #collage auswahl
     collage = Select(driver.find_element_by_id('inputCollegeId'))
     collage.select_by_value('281')
@@ -1275,7 +1546,7 @@ else:
     print("Wrong Input!")
     time.sleep(3)
     exit()
-collage = input("Which Collage?\n1. Sacramento (Google Drive) \n2. Coastline (Azure RDP / maybe broke)\n3. Crafton Hills (RDP)\n4. San Bernardino\n5. Santa Monica\n6. Solano\n7. CCSF\n\n")
+collage = input("Which Collage?\n1. Sacramento (Google Drive) \n2. Coastline (Azure RDP / maybe broke)\n3. Crafton Hills \n4. San Bernardino\n5. Santa Monica\n6. Solano\n7. CCSF\n 8. Canada College\n 9. Santa Barbara\n\n")
 
 if collage == "1":
     print("[*] Sacremento")
@@ -1291,6 +1562,10 @@ elif collage == "6":
     print("[*] Solano Community")
 elif collage == "7":
     print("[*] City College of San Francisco ")
+elif collage == "8":
+    print("[*] Canada Collage")
+elif collage == "9":
+    print("[*] Santa Barbara City College")
 else:
     print("Wrong input")
     time.sleep(3)
@@ -1298,4 +1573,7 @@ else:
 
 
 while accounts > generated:
-    createaccount(collage)
+    createaccount(collage, use_captcha)
+    #Bot(collage, use_captcha)
+
+
