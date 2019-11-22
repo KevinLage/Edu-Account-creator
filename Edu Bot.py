@@ -35,12 +35,12 @@ def Bot(collage,use_captcha):
         captcha, gay = captcha.split("\n")
     except:
         pass
-    namesss = open('FakeNameGenerator.csv').read().splitlines()
-
-    myline = random.choice(namesss)
-    first, last, number, ssn = myline.split(",")
-
-
+    try:
+        full_mail = config[2]
+        fullmail = 1
+    except:
+        fullmail = 0
+        pass
     def randomName(size=10, chars=string.ascii_letters + string.digits):
         return ''.join(random.choice(chars) for i in range(size))
 
@@ -56,14 +56,13 @@ def Bot(collage,use_captcha):
     lines = open('FakeNameGenerator.csv').read().splitlines()
 
     myline = random.choice(lines)
-    first, last, number, ssn = myline.split(",")
+    first, last, number, ssn, street, city, zipcode = myline.split(",")
 
 
     ssnlol = ssn
 
     register_button = driver.find_element_by_name("_eventId_continue")
     register_button.click()
-
 
 
     first_name = driver.find_element_by_name("firstName")
@@ -100,18 +99,25 @@ def Bot(collage,use_captcha):
     time.sleep(4)
 
 
+    if fullmail == 0:
+        email = randomName() + mail
+    else:
+        email = full_mail
 
-    email = randomName() + mail
     driver.find_element_by_id("inputEmail").send_keys(email)
     driver.find_element_by_id("inputEmailConfirm").send_keys(email)
     time.sleep(4)
     driver.find_element_by_id("inputSmsPhone").send_keys(number)
-    driver.find_element_by_id("inputHomeless").click()
-    driver.find_element_by_id("homeless-confirm-yes").click()
-    driver.find_element_by_id("homelessConfirmationDialog-modal-ok-button").click()
+    driver.find_element_by_id("inputStreetAddress1").send_keys(street)
+    driver.find_element_by_id("inputCity").send_keys(city)
+    state = Select(driver.find_element_by_id('inputState'))
+    state.select_by_value('CA')
+    driver.find_element_by_id("inputPostalCode").send_keys(zipcode)
+    time.sleep(4)
     driver.find_element_by_id("accountFormSubmit").click()
 
-    print("[*] Page 2/3 Done!")
+
+
 
 
 
@@ -120,9 +126,16 @@ def Bot(collage,use_captcha):
     name = randomName()
 
 
-
+    try:
+        driver.find_element_by_id("inputUserId").send_keys(name)
+        print("[*] Page 2/3 Done!")
+    except:
+        driver.find_element_by_id("error-modal-ok-button").click()
+        driver.find_element_by_id("inputAddressValidationOverride").click()
+        driver.find_element_by_id("accountFormSubmit").click()
+        
+    print("[*] Page 2/3 Done!")   
     driver.find_element_by_id("inputUserId").send_keys(name)
-
     driver.find_element_by_id("inputPasswd").send_keys(pw)
     driver.find_element_by_id("inputPasswdConfirm").send_keys(pw)
 
@@ -164,8 +177,10 @@ def Bot(collage,use_captcha):
             r = requests.get(url2)
             print("[*] Waiting for 2Captcha")
             time.sleep(3)
-
-        ok, key = r.text.split("|")
+        try:
+            ok, key = r.text.split("|")
+        except:
+            print(r.text)
 
         command = 'document.getElementById("g-recaptcha-response").innerHTML="' + key + '";'
         driver.execute_script("document.getElementsByName('captchaResponse')[0].setAttribute('type', 'shown');")
@@ -192,30 +207,36 @@ def Bot(collage,use_captcha):
     time.sleep(3)
 
     if collage == "1":
-        Coastline(name, pw, number, email)
+        Coastline(name,pw,email,first,last,number,ssn, street, city, zipcode)
     elif collage == "2":
-        Coastline(name,pw,number,email)
+        Coastline(name,pw,email,first,last,number,ssn, street, city, zipcode)
     elif collage == "3":
-        Crafton(name,pw,number,email)
+        Crafton(name,pw,email,first,last,number,ssn, street, city, zipcode)
     elif collage == "4":
-        San_Bernardino(name,pw,number,email)
+        San_Bernardino(name,pw,email,first,last,number,ssn, street, city, zipcode)
     elif collage == "5":
-        Santa_Monica(name,pw,number,email)
+        Santa_Monica(name,pw,email,first,last,number,ssn, street, city, zipcode)
     elif collage == "6":
-        Solano(name,pw,number,email)
+        Solano(name,pw,email,first,last,number,ssn, street, city, zipcode)
     elif collage == "7":
-        ccsf(name,pw,number,email)
+        ccsf(name,pw,email,first,last,number,ssn, street, city, zipcode)
     elif collage == "8":
-        Canada(name,pw,number,email)
+        Canada(name,pw,email,first,last,number,ssn, street, city, zipcode)
     elif collage == "9":
-        Barbara(name,pw,number,email)
+        barbara(name,pw,email,first,last,number,ssn, street, city, zipcode)
+    elif collage == "10":
+        gavilan(name,pw,email,first,last,number,ssn, street, city, zipcode)
+    elif collage == "11":
+        orange(name,pw,email,first,last,number,ssn, street, city, zipcode)
     else:
         print("Fuck")
         exit()
+#first, last, number, ssn, street, city, zipcode
 
-def Barbara(name,pw,number,email):
+def orange(name,pw,email,first,last,number,ssn, street, city, zipcode):
     global generated
     global accounts
+
 
     driver = webdriver.Firefox(executable_path= geckopath)
     driver.get("https://www.opencccapply.net/uPortal/f/u63l1s1000/normal/render.uP")
@@ -237,6 +258,304 @@ def Barbara(name,pw,number,email):
         pass
 #collage auswahl
     collage = Select(driver.find_element_by_id('inputCollegeId'))
+    collage.select_by_value('833')
+    driver.find_element_by_id("beginApplicationButton").click()
+    time.sleep(4)
+#enrollment
+    driver.find_elements_by_tag_name("option")[1].click()
+    time.sleep(0.5)
+    collage = Select(driver.find_element_by_id('inputEduGoal'))
+    collage.select_by_value('F')
+    time.sleep(1)
+    driver.find_elements_by_tag_name("option")[25].click()
+    driver.find_element_by_name("_eventId_continue").click()
+    time.sleep(2)
+#account info
+    driver.find_element_by_id("inputStreetAddress1").send_keys(street)
+    driver.find_element_by_id("inputCity").send_keys(city)
+    state = Select(driver.find_element_by_id('inputState'))
+    state.select_by_value('CA')
+    driver.find_element_by_id("inputPostalCode").send_keys(zipcode)
+    driver.find_element_by_name("_eventId_continue").click()
+    try:
+        driver.find_element_by_id("inputHsAttendance3").click()
+        
+    except:
+        driver.find_element_by_id("messageFooterLabel").click()
+        driver.find_element_by_id("inputAddressValidationOverride").click()
+        driver.find_element_by_name("_eventId_continue").click()
+        
+    
+#education
+    driver.find_elements_by_tag_name("option")[1].click()
+    time.sleep(1)
+    driver.find_elements_by_tag_name("option")[9].click()
+    driver.find_element_by_id("inputHsAttendance3").click()
+    driver.find_element_by_name("_eventId_continue").click()
+#military
+    driver.find_elements_by_tag_name("option")[1].click()
+    time.sleep(1)
+    s2 = Select(driver.find_element_by_id('inputMilitaryStatus'))
+    s2.select_by_value('1')
+    time.sleep(4.5)
+    driver.find_element_by_name("_eventId_continue").click()
+    driver.find_element_by_id("inputCaRes2YearsYes").click()
+    driver.find_element_by_id("inputIsEverInFosterCareNo").click()
+    time.sleep(4.5)
+    driver.find_element_by_name("_eventId_continue").click()
+#needs
+    driver.find_element_by_id("inputEnglishYes").click()
+    driver.find_element_by_id("inputFinAidInfoNo").click()
+    time.sleep(1)
+    driver.find_element_by_id("inputAssistanceNo").click()
+    driver.find_element_by_id("inputAthleticInterest3").click()
+    time.sleep(1)
+    driver.find_element_by_name("_eventId_continue").click()
+#demographic
+    gender = Select(driver.find_element_by_id('inputGender'))
+    gender.select_by_value('Male')
+    time.sleep(1)
+
+    trans = Select(driver.find_element_by_id('inputTransgender'))
+    trans.select_by_value('No')
+    time.sleep(4.5)
+    sexual = Select(driver.find_element_by_id('inputOrientation'))
+    sexual.select_by_value('StraightHetrosexual')
+
+    guard = Select(driver.find_element_by_id('inputParentGuardianEdu1'))
+    guard.select_by_value('3')
+    time.sleep(1.5)
+    guard2 = Select(driver.find_element_by_id('inputParentGuardianEdu2'))
+    guard2.select_by_value('Y')
+
+    driver.find_element_by_id("inputHispanicNo").click()
+
+    driver.find_element_by_id("inputRaceEthnicity800").click()
+    time.sleep(4.5)
+    driver.find_element_by_id("inputRaceEthnicity806").click()
+    time.sleep(1.5)
+    driver.find_element_by_name("_eventId_continue").click()
+#supplemental
+
+    driver.find_element_by_id("_supp_TEXT_1").send_keys(city)
+    state = Select(driver.find_element_by_id('_supp_STATE_1'))
+    state.select_by_value('CA')
+    driver.find_element_by_id("YESNO_2_no").click()
+    driver.find_element_by_id("YESNO_3_no").click()
+    time.sleep(0.5)
+    state = Select(driver.find_element_by_id('_supp_MENU_1'))
+    state.select_by_value('10')
+    driver.find_element_by_id("_supp_CHECK_29").click()    
+    driver.find_element_by_name("_eventId_continue").click()
+
+
+#submisson
+
+    time.sleep(0.5)
+    driver.find_element_by_id("inputConsentYes").click()
+    time.sleep(3)
+
+    driver.find_element_by_id("inputESignature").click()
+    driver.find_element_by_id("inputFinancialAidAck").click()
+    print("[*] Sleeping 25 seconds!")
+    time.sleep(25)
+    driver.find_element_by_id("submit-application-button").click()
+    time.sleep(5)
+    driver.find_element_by_name("_eventId_finish").click()
+    time.sleep(1)
+
+    driver.find_element_by_id("inputEnglishSatisfied").click()
+    driver.find_element_by_id("RecommendYes").click()
+    driver.find_element_by_name("_eventId_submit").click()
+
+    time.sleep(1)
+    driver.quit()
+    time.sleep(3)
+    generated += 1
+    print(generated , "/" , accounts , " Accounts are done!")
+    with open("accountsb.txt", "a+") as file:
+        file.write(name + ":" + pw + "  Email:" + email + " " + first + " " + last + " SSN: " + ssn + " number: " + number)
+        file.write("\n")
+
+
+
+
+def gavilan(name,pw,email,first,last,number,ssn, street, city, zipcode):
+    global generated
+    global accounts
+
+
+    driver = webdriver.Firefox(executable_path= geckopath)
+    driver.get("https://www.opencccapply.net/uPortal/f/u63l1s1000/normal/render.uP")
+    time.sleep(1)
+    driver.find_element_by_id("portal-sign-in-link").click()
+    driver.find_element_by_id("inputJUsername").send_keys(name)
+    time.sleep(1)
+    driver.find_element_by_id("inputJPassword").send_keys(pw)
+    driver.find_element_by_name("_eventId_proceed").click()
+    time.sleep(3)
+    try:
+        driver.find_elements_by_css_selector(".btn-primary")[3].click()
+        time.sleep(1)
+
+        driver.find_element_by_id("delete-confirmation-ok-button").click()
+        time.sleep(4.5)
+    except:
+        time.sleep(3)
+        pass
+#collage auswahl
+    collage = Select(driver.find_element_by_id('inputCollegeId'))
+    collage.select_by_value('441')
+    driver.find_element_by_id("beginApplicationButton").click()
+    time.sleep(4)
+#enrollment
+    driver.find_elements_by_tag_name("option")[1].click()
+    time.sleep(0.5)
+    collage = Select(driver.find_element_by_id('inputEduGoal'))
+    collage.select_by_value('F')
+    time.sleep(1)
+    driver.find_elements_by_tag_name("option")[25].click()
+    driver.find_element_by_name("_eventId_continue").click()
+    time.sleep(2)
+#account info
+    driver.find_element_by_id("inputStreetAddress1").send_keys(street)
+    driver.find_element_by_id("inputCity").send_keys(city)
+    state = Select(driver.find_element_by_id('inputState'))
+    state.select_by_value('CA')
+    driver.find_element_by_id("inputPostalCode").send_keys(zipcode)
+    driver.find_element_by_name("_eventId_continue").click()
+    try:
+        driver.find_element_by_id("inputHsAttendance3").click()
+        
+    except:
+        driver.find_element_by_id("messageFooterLabel").click()
+        driver.find_element_by_id("inputAddressValidationOverride").click()
+        driver.find_element_by_name("_eventId_continue").click()
+        
+    
+#education
+    driver.find_elements_by_tag_name("option")[1].click()
+    time.sleep(1)
+    driver.find_elements_by_tag_name("option")[9].click()
+    driver.find_element_by_id("inputHsAttendance3").click()
+    driver.find_element_by_name("_eventId_continue").click()
+#military
+    driver.find_elements_by_tag_name("option")[1].click()
+    time.sleep(1)
+    s2 = Select(driver.find_element_by_id('inputMilitaryStatus'))
+    s2.select_by_value('1')
+    time.sleep(4.5)
+    driver.find_element_by_name("_eventId_continue").click()
+    driver.find_element_by_id("inputCaRes2YearsYes").click()
+    driver.find_element_by_id("inputIsEverInFosterCareNo").click()
+    time.sleep(4.5)
+    driver.find_element_by_name("_eventId_continue").click()
+#needs
+    driver.find_element_by_id("inputEnglishYes").click()
+    driver.find_element_by_id("inputFinAidInfoNo").click()
+    time.sleep(1)
+    driver.find_element_by_id("inputAssistanceNo").click()
+    driver.find_element_by_id("inputAthleticInterest3").click()
+    time.sleep(1)
+    driver.find_element_by_name("_eventId_continue").click()
+#demographic
+    gender = Select(driver.find_element_by_id('inputGender'))
+    gender.select_by_value('Male')
+    time.sleep(1)
+
+    trans = Select(driver.find_element_by_id('inputTransgender'))
+    trans.select_by_value('No')
+    time.sleep(4.5)
+    sexual = Select(driver.find_element_by_id('inputOrientation'))
+    sexual.select_by_value('StraightHetrosexual')
+
+    guard = Select(driver.find_element_by_id('inputParentGuardianEdu1'))
+    guard.select_by_value('3')
+    time.sleep(1.5)
+    guard2 = Select(driver.find_element_by_id('inputParentGuardianEdu2'))
+    guard2.select_by_value('Y')
+
+    driver.find_element_by_id("inputHispanicNo").click()
+
+    driver.find_element_by_id("inputRaceEthnicity800").click()
+    time.sleep(4.5)
+    driver.find_element_by_id("inputRaceEthnicity806").click()
+    time.sleep(1.5)
+    driver.find_element_by_name("_eventId_continue").click()
+    time.sleep(1.5)
+#supplemental
+
+    driver.find_element_by_id("_supp_TEXT_1").send_keys(first)
+    driver.find_element_by_id("_supp_TEXT_2").send_keys(last)
+    driver.find_element_by_id("_supp_TEXT_3").send_keys("54412")
+    time.sleep(1)
+    driver.find_element_by_id("_supp_TEXT_4").send_keys(number)
+    driver.find_element_by_id("_supp_TEXT_6").send_keys(street)
+    driver.find_element_by_id("_supp_TEXT_8").send_keys(city)
+    time.sleep(1)
+    driver.find_element_by_id("_supp_TEXT_9").send_keys(zipcode)
+    relation = Select(driver.find_element_by_id('_supp_MENU_1'))
+    relation.select_by_value('N')
+    state = Select(driver.find_element_by_id('_supp_STATE_1'))
+    state.select_by_value('CA')
+    driver.find_element_by_name("_eventId_continue").click()
+    time.sleep(1)
+
+#submisson
+
+    time.sleep(0.5)
+    driver.find_element_by_id("inputConsentYes").click()
+    time.sleep(3)
+
+    driver.find_element_by_id("inputESignature").click()
+    driver.find_element_by_id("inputFinancialAidAck").click()
+    print("[*] Sleeping 25 seconds!")
+    time.sleep(25)
+    driver.find_element_by_id("submit-application-button").click()
+    time.sleep(5)
+    driver.find_element_by_name("_eventId_finish").click()
+    time.sleep(1)
+
+    driver.find_element_by_id("inputEnglishSatisfied").click()
+    driver.find_element_by_id("RecommendYes").click()
+    driver.find_element_by_name("_eventId_submit").click()
+
+    time.sleep(1)
+    driver.quit()
+    time.sleep(3)
+    generated += 1
+    print(generated , "/" , accounts , " Accounts are done!")
+    with open("accountsb.txt", "a+") as file:
+        file.write(name + ":" + pw + "  Email:" + email + " " + first + " " + last + " SSN: " + ssn + " number: " + number)
+        file.write("\n")
+
+
+def barbara(name,pw,email,first,last,number,ssn, street, city, zipcode):
+    global generated
+    global accounts
+
+
+    driver = webdriver.Firefox(executable_path= geckopath)
+    driver.get("https://www.opencccapply.net/uPortal/f/u63l1s1000/normal/render.uP")
+    time.sleep(1)
+    driver.find_element_by_id("portal-sign-in-link").click()
+    driver.find_element_by_id("inputJUsername").send_keys(name)
+    time.sleep(1)
+    driver.find_element_by_id("inputJPassword").send_keys(pw)
+    driver.find_element_by_name("_eventId_proceed").click()
+    time.sleep(3)
+    try:
+        driver.find_elements_by_css_selector(".btn-primary")[3].click()
+        time.sleep(1)
+
+        driver.find_element_by_id("delete-confirmation-ok-button").click()
+        time.sleep(4.5)
+    except:
+        time.sleep(3)
+        pass
+#collage auswahl
+    collage = Select(driver.find_element_by_id('inputCollegeId'))
+    time.sleep(484)
     collage.select_by_value('651')
     driver.find_element_by_id("beginApplicationButton").click()
     time.sleep(4)
@@ -250,12 +569,19 @@ def Barbara(name,pw,number,email):
     driver.find_element_by_name("_eventId_continue").click()
     time.sleep(2)
 #account info
-    driver.find_element_by_id("inputHomelessNoMailingAddress").click()
-    time.sleep(1)
-    driver.find_element_by_id("homelessNoCurrentMailingAddress-confirm-yes").click()
-    driver.find_element_by_id("homelessNoCurrentMailingAddressConfirmationDialog-modal-ok-button").click()
-    time.sleep(0.5)
+    driver.find_element_by_id("inputStreetAddress1").send_keys(street)
+    driver.find_element_by_id("inputCity").send_keys(city)
+    state = Select(driver.find_element_by_id('inputState'))
+    state.select_by_value('CA')
+    driver.find_element_by_id("inputPostalCode").send_keys(zipcode)
     driver.find_element_by_name("_eventId_continue").click()
+    try:
+        driver.find_element_by_id("inputHsAttendance3").click()
+        
+    except:
+        driver.find_element_by_id("messageFooterLabel").click()
+        driver.find_element_by_id("inputAddressValidationOverride").click()
+        driver.find_element_by_name("_eventId_continue").click()
 #education
     driver.find_elements_by_tag_name("option")[1].click()
     time.sleep(1)
@@ -352,12 +678,11 @@ def Barbara(name,pw,number,email):
     generated += 1
     print(generated , "/" , accounts , " Accounts are done!")
     with open("accountsb.txt", "a+") as file:
-        file.write(name + ":" + pw)
-        file.write("  Email:" + email)
+        file.write(name + ":" + pw + "  Email:" + email + " " + first + " " + last + " SSN: " + ssn + " number: " + number)
         file.write("\n")
 
 
-def Canada(name,pw,number,email):
+def Canada(name,pw,email,first,last,number,ssn, street, city, zipcode):
     global generated
     global accounts
 
@@ -395,12 +720,19 @@ def Canada(name,pw,number,email):
     driver.find_element_by_name("_eventId_continue").click()
     time.sleep(2)
 #account info
-    driver.find_element_by_id("inputHomelessNoMailingAddress").click()
-    time.sleep(1)
-    driver.find_element_by_id("homelessNoCurrentMailingAddress-confirm-yes").click()
-    driver.find_element_by_id("homelessNoCurrentMailingAddressConfirmationDialog-modal-ok-button").click()
-    time.sleep(0.5)
+    driver.find_element_by_id("inputStreetAddress1").send_keys(street)
+    driver.find_element_by_id("inputCity").send_keys(city)
+    state = Select(driver.find_element_by_id('inputState'))
+    state.select_by_value('CA')
+    driver.find_element_by_id("inputPostalCode").send_keys(zipcode)
     driver.find_element_by_name("_eventId_continue").click()
+    try:
+        driver.find_element_by_id("inputHsAttendance3").click()
+        
+    except:
+        driver.find_element_by_id("messageFooterLabel").click()
+        driver.find_element_by_id("inputAddressValidationOverride").click()
+        driver.find_element_by_name("_eventId_continue").click()
 #education
     driver.find_elements_by_tag_name("option")[1].click()
     time.sleep(1)
@@ -477,11 +809,10 @@ def Canada(name,pw,number,email):
     generated += 1
     print(generated , "/" , accounts , " Accounts are done!")
     with open("accountsb.txt", "a+") as file:
-        file.write(name + ":" + pw)
-        file.write("  Email:" + email)
+        file.write(name + ":" + pw + "  Email:" + email + " " + first + " " + last + " SSN: " + ssn + " number: " + number)
         file.write("\n")
 
-def Solano(name,pw,number,email):
+def Solano(name,pw,email,first,last,number,ssn, street, city, zipcode):
     global generated
     global accounts
 
@@ -519,12 +850,19 @@ def Solano(name,pw,number,email):
     driver.find_element_by_name("_eventId_continue").click()
     time.sleep(2)
 #account info
-    driver.find_element_by_id("inputHomelessNoMailingAddress").click()
-    time.sleep(1)
-    driver.find_element_by_id("homelessNoCurrentMailingAddress-confirm-yes").click()
-    driver.find_element_by_id("homelessNoCurrentMailingAddressConfirmationDialog-modal-ok-button").click()
-    time.sleep(0.5)
+    driver.find_element_by_id("inputStreetAddress1").send_keys(street)
+    driver.find_element_by_id("inputCity").send_keys(city)
+    state = Select(driver.find_element_by_id('inputState'))
+    state.select_by_value('CA')
+    driver.find_element_by_id("inputPostalCode").send_keys(zipcode)
     driver.find_element_by_name("_eventId_continue").click()
+    try:
+        driver.find_element_by_id("inputHsAttendance3").click()
+        
+    except:
+        driver.find_element_by_id("messageFooterLabel").click()
+        driver.find_element_by_id("inputAddressValidationOverride").click()
+        driver.find_element_by_name("_eventId_continue").click()
 #education
     driver.find_elements_by_tag_name("option")[1].click()
     time.sleep(1)
@@ -604,11 +942,10 @@ def Solano(name,pw,number,email):
     generated += 1
     print(generated , "/" , accounts , " Accounts are done!")
     with open("accountsb.txt", "a+") as file:
-        file.write(name + ":" + pw)
-        file.write("  Email:" + email)
+        file.write(name + ":" + pw + "  Email:" + email + " " + first + " " + last + " SSN: " + ssn + " number: " + number)
         file.write("\n")
 
-def ccsf(name,pw,number,email):
+def ccsf(name,pw,email,first,last,number,ssn, street, city, zipcode):
     global generated
     global accounts
 
@@ -646,12 +983,19 @@ def ccsf(name,pw,number,email):
     driver.find_element_by_name("_eventId_continue").click()
     time.sleep(2)
 #account info
-    driver.find_element_by_id("inputHomelessNoMailingAddress").click()
-    time.sleep(1)
-    driver.find_element_by_id("homelessNoCurrentMailingAddress-confirm-yes").click()
-    driver.find_element_by_id("homelessNoCurrentMailingAddressConfirmationDialog-modal-ok-button").click()
-    time.sleep(0.5)
+    driver.find_element_by_id("inputStreetAddress1").send_keys(street)
+    driver.find_element_by_id("inputCity").send_keys(city)
+    state = Select(driver.find_element_by_id('inputState'))
+    state.select_by_value('CA')
+    driver.find_element_by_id("inputPostalCode").send_keys(zipcode)
     driver.find_element_by_name("_eventId_continue").click()
+    try:
+        driver.find_element_by_id("inputHsAttendance3").click()
+        
+    except:
+        driver.find_element_by_id("messageFooterLabel").click()
+        driver.find_element_by_id("inputAddressValidationOverride").click()
+        driver.find_element_by_name("_eventId_continue").click()
 #education
     driver.find_elements_by_tag_name("option")[1].click()
     time.sleep(1)
@@ -735,15 +1079,14 @@ def ccsf(name,pw,number,email):
     generated += 1
     print(generated , "/" , accounts , " Accounts are done!")
     with open("accountsb.txt", "a+") as file:
-        file.write(name + ":" + pw)
-        file.write("  Email:" + email)
+        file.write(name + ":" + pw + "  Email:" + email + " " + first + " " + last + " SSN: " + ssn + " number: " + number)
         file.write("\n")
 
 
 
 
 
-def San_Bernardino(name,pw,number,email):
+def San_Bernardino(name,pw,email,first,last,number,ssn, street, city, zipcode):
     global generated
     global accounts
 
@@ -780,12 +1123,19 @@ def San_Bernardino(name,pw,number,email):
     driver.find_element_by_name("_eventId_continue").click()
     time.sleep(2)
 #account info
-    driver.find_element_by_id("inputHomelessNoMailingAddress").click()
-    time.sleep(1)
-    driver.find_element_by_id("homelessNoCurrentMailingAddress-confirm-yes").click()
-    driver.find_element_by_id("homelessNoCurrentMailingAddressConfirmationDialog-modal-ok-button").click()
-    time.sleep(0.5)
+    driver.find_element_by_id("inputStreetAddress1").send_keys(street)
+    driver.find_element_by_id("inputCity").send_keys(city)
+    state = Select(driver.find_element_by_id('inputState'))
+    state.select_by_value('CA')
+    driver.find_element_by_id("inputPostalCode").send_keys(zipcode)
     driver.find_element_by_name("_eventId_continue").click()
+    try:
+        driver.find_element_by_id("inputHsAttendance3").click()
+        
+    except:
+        driver.find_element_by_id("messageFooterLabel").click()
+        driver.find_element_by_id("inputAddressValidationOverride").click()
+        driver.find_element_by_name("_eventId_continue").click()
 #education
     driver.find_elements_by_tag_name("option")[1].click()
     time.sleep(1)
@@ -883,13 +1233,12 @@ def San_Bernardino(name,pw,number,email):
     generated += 1
     print(generated , "/" , accounts , " Accounts are done!")
     with open("accountsb.txt", "a+") as file:
-        file.write(name + ":" + pw)
-        file.write("  Email:" + email)
+        file.write(name + ":" + pw + "  Email:" + email + " " + first + " " + last + " SSN: " + ssn + " number: " + number)
         file.write("\n")
 
 
 
-def Crafton(name,pw,number,email):
+def Crafton(name,pw,email,first,last,number,ssn, street, city, zipcode):
     global generated
     global accounts
 
@@ -927,12 +1276,19 @@ def Crafton(name,pw,number,email):
     driver.find_element_by_name("_eventId_continue").click()
     time.sleep(2)
 #account info
-    driver.find_element_by_id("inputHomelessNoMailingAddress").click()
-    time.sleep(1)
-    driver.find_element_by_id("homelessNoCurrentMailingAddress-confirm-yes").click()
-    driver.find_element_by_id("homelessNoCurrentMailingAddressConfirmationDialog-modal-ok-button").click()
-    time.sleep(0.5)
+    driver.find_element_by_id("inputStreetAddress1").send_keys(street)
+    driver.find_element_by_id("inputCity").send_keys(city)
+    state = Select(driver.find_element_by_id('inputState'))
+    state.select_by_value('CA')
+    driver.find_element_by_id("inputPostalCode").send_keys(zipcode)
     driver.find_element_by_name("_eventId_continue").click()
+    try:
+        driver.find_element_by_id("inputHsAttendance3").click()
+        
+    except:
+        driver.find_element_by_id("messageFooterLabel").click()
+        driver.find_element_by_id("inputAddressValidationOverride").click()
+        driver.find_element_by_name("_eventId_continue").click()
 #education
     driver.find_elements_by_tag_name("option")[1].click()
     time.sleep(1)
@@ -1031,11 +1387,10 @@ def Crafton(name,pw,number,email):
     generated += 1
     print(generated , "/" , accounts , " Accounts are done!")
     with open("accountsb.txt", "a+") as file:
-        file.write(name + ":" + pw)
-        file.write("  Email:" + email)
+        file.write(name + ":" + pw + "  Email:" + email + " " + first + " " + last + " SSN: " + ssn + " number: " + number)
         file.write("\n")
 
-def San_Bernardino(name,pw,number,email):
+def San_Bernardino(name,pw,email,first,last,number,ssn, street, city, zipcode):
     global generated
     global accounts
 
@@ -1072,12 +1427,19 @@ def San_Bernardino(name,pw,number,email):
     driver.find_element_by_name("_eventId_continue").click()
     time.sleep(2)
 #account info
-    driver.find_element_by_id("inputHomelessNoMailingAddress").click()
-    time.sleep(1)
-    driver.find_element_by_id("homelessNoCurrentMailingAddress-confirm-yes").click()
-    driver.find_element_by_id("homelessNoCurrentMailingAddressConfirmationDialog-modal-ok-button").click()
-    time.sleep(0.5)
+    driver.find_element_by_id("inputStreetAddress1").send_keys(street)
+    driver.find_element_by_id("inputCity").send_keys(city)
+    state = Select(driver.find_element_by_id('inputState'))
+    state.select_by_value('CA')
+    driver.find_element_by_id("inputPostalCode").send_keys(zipcode)
     driver.find_element_by_name("_eventId_continue").click()
+    try:
+        driver.find_element_by_id("inputHsAttendance3").click()
+        
+    except:
+        driver.find_element_by_id("messageFooterLabel").click()
+        driver.find_element_by_id("inputAddressValidationOverride").click()
+        driver.find_element_by_name("_eventId_continue").click()
 #education
     driver.find_elements_by_tag_name("option")[1].click()
     time.sleep(1)
@@ -1175,12 +1537,11 @@ def San_Bernardino(name,pw,number,email):
     generated += 1
     print(generated , "/" , accounts , " Accounts are done!")
     with open("accountsb.txt", "a+") as file:
-        file.write(name + ":" + pw)
-        file.write("  Email:" + email)
+        file.write(name + ":" + pw + "  Email:" + email + " " + first + " " + last + " SSN: " + ssn + " number: " + number)
         file.write("\n")
 
 
-def Santa_Monica(name,pw,number,email):
+def Santa_Monica(name,pw,email,first,last,number,ssn, street, city, zipcode):
     global generated
     global accounts
 
@@ -1219,12 +1580,19 @@ def Santa_Monica(name,pw,number,email):
     driver.find_element_by_name("_eventId_continue").click()
     time.sleep(2)
 #account info
-    driver.find_element_by_id("inputHomelessNoMailingAddress").click()
-    time.sleep(1)
-    driver.find_element_by_id("homelessNoCurrentMailingAddress-confirm-yes").click()
-    driver.find_element_by_id("homelessNoCurrentMailingAddressConfirmationDialog-modal-ok-button").click()
-    time.sleep(0.5)
+    driver.find_element_by_id("inputStreetAddress1").send_keys(street)
+    driver.find_element_by_id("inputCity").send_keys(city)
+    state = Select(driver.find_element_by_id('inputState'))
+    state.select_by_value('CA')
+    driver.find_element_by_id("inputPostalCode").send_keys(zipcode)
     driver.find_element_by_name("_eventId_continue").click()
+    try:
+        driver.find_element_by_id("inputHsAttendance3").click()
+        
+    except:
+        driver.find_element_by_id("messageFooterLabel").click()
+        driver.find_element_by_id("inputAddressValidationOverride").click()
+        driver.find_element_by_name("_eventId_continue").click()
 #education
     driver.find_elements_by_tag_name("option")[1].click()
     time.sleep(1)
@@ -1317,13 +1685,12 @@ def Santa_Monica(name,pw,number,email):
     generated += 1
     print(generated , "/" , accounts , " Accounts are done!")
     with open("accountsb.txt", "a+") as file:
-        file.write(name + ":" + pw)
-        file.write("  Email:" + email)
+        file.write(name + ":" + pw + "  Email:" + email + " " + first + " " + last + " SSN: " + ssn + " number: " + number)
         file.write("\n")
 
 
 
-def Coastline(name,pw,number,email):
+def Coastline(name,pw,email,first,last,number,ssn, street, city, zipcode):
     global generated
     global accounts
 
@@ -1346,6 +1713,7 @@ def Coastline(name,pw,number,email):
         time.sleep(4.5)
     except:
         time.sleep(3)
+        
 
         pass
 
@@ -1361,13 +1729,19 @@ def Coastline(name,pw,number,email):
     driver.find_elements_by_tag_name("option")[25].click()
     driver.find_element_by_name("_eventId_continue").click()
     time.sleep(2)
-    driver.find_element_by_id("inputHomelessNoMailingAddress").click()
-    time.sleep(1)
-
-    driver.find_element_by_id("homelessNoCurrentMailingAddress-confirm-yes").click()
-    driver.find_element_by_id("homelessNoCurrentMailingAddressConfirmationDialog-modal-ok-button").click()
-    time.sleep(0.5)
+    driver.find_element_by_id("inputStreetAddress1").send_keys(street)
+    driver.find_element_by_id("inputCity").send_keys(city)
+    state = Select(driver.find_element_by_id('inputState'))
+    state.select_by_value('CA')
+    driver.find_element_by_id("inputPostalCode").send_keys(zipcode)
     driver.find_element_by_name("_eventId_continue").click()
+    try:
+        driver.find_element_by_id("inputHsAttendance3").click()
+        
+    except:
+        driver.find_element_by_id("messageFooterLabel").click()
+        driver.find_element_by_id("inputAddressValidationOverride").click()
+        driver.find_element_by_name("_eventId_continue").click()
     driver.find_elements_by_tag_name("option")[1].click()
     time.sleep(1)
 
@@ -1390,7 +1764,7 @@ def Coastline(name,pw,number,email):
     time.sleep(1)
 
     driver.find_element_by_id("inputAssistanceNo").click()
-    driver.find_element_by_id("inputAthleticInterest1").click()
+    driver.find_element_by_id("inputAthleticInterest3").click()
     time.sleep(1)
 
 
@@ -1504,8 +1878,7 @@ def Coastline(name,pw,number,email):
     generated += 1
     print(generated , "/" , accounts , " Accounts are done!")
     with open("accountsb.txt", "a+") as file:
-        file.write(name + ":" + pw)
-        file.write(" Email:" + email)
+        file.write(name + ":" + pw + "  Email:" + email + " " + first + " " + last + " SSN: " + ssn + " number: " + number)
         file.write("\n")
 
 if platform.system() == "Windows": #checking OS
@@ -1546,7 +1919,9 @@ else:
     print("Wrong Input!")
     time.sleep(3)
     exit()
-collage = input("Which Collage?\n1. Sacramento (Google Drive) \n2. Coastline (Azure RDP / maybe broke)\n3. Crafton Hills \n4. San Bernardino\n5. Santa Monica\n6. Solano\n7. CCSF\n 8. Canada College\n 9. Santa Barbara\n\n")
+
+
+collage = input("Which Collage?\n1. Sacramento (Google Drive) \n2. Coastline (Azure RDP / maybe broke)\n3. Crafton Hills \n4. San Bernardino\n5. Santa Monica\n6. Solano\n7. CCSF\n8. Canada College\n9. Santa Barbara\n10. Gavilan College\n11. Orange Coast College\n")
 
 if collage == "1":
     print("[*] Sacremento")
@@ -1566,6 +1941,10 @@ elif collage == "8":
     print("[*] Canada Collage")
 elif collage == "9":
     print("[*] Santa Barbara City College")
+elif collage == "10":
+    print("[*] Gavilan College")
+elif collage == "11":
+    print("[*] Orange Coast College")
 else:
     print("Wrong input")
     time.sleep(3)
