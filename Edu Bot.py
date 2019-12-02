@@ -41,6 +41,7 @@ def Bot(collage,use_captcha):
     except:
         fullmail = 0
         pass
+
     def randomName(size=10, chars=string.ascii_letters + string.digits):
         return ''.join(random.choice(chars) for i in range(size))
 
@@ -1048,10 +1049,13 @@ def ccsf(name,pw,email,first,last,number,ssn, street, city, zipcode):
     time.sleep(1.5)
 #submental
 
-    driver.find_element_by_id("_supp_CHECK_1").click()
     Select(driver.find_element_by_id("_supp_MENU_1")).select_by_value('ENG')
     time.sleep(2)
-    Select(driver.find_element_by_id("_supp_MENU_4")).select_by_value('OPT1')
+    Select(driver.find_element_by_id("_supp_MENU_5")).select_by_value('N')
+    Select(driver.find_element_by_id("_supp_MENU_6")).select_by_value('N')
+    Select(driver.find_element_by_id("_supp_MENU_4")).select_by_value('OPT2')
+    driver.find_element_by_id("_supp_CHECK_5").click()
+    time.sleep(3)
     driver.find_element_by_name("_eventId_continue").click()
 
 #submisson
