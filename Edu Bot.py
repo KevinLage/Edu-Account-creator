@@ -120,10 +120,8 @@ def Bot(collage,use_captcha):
     city = datafake.addy["province"]
     zipcode = datafake.addy["zip"]
     
-    #first, last, number, ssn, street, city, zipcode = myline.split(",")
-    
-    pw = randomPassword() + "1"
-    name = randomName()
+    pw = datafake.password
+    name = datafake.username
     
     if fullmail == 0:
         email = randomName() + mail
