@@ -21,8 +21,8 @@ def createaccount(collage,use_captcha):
 
 
 def Bot(collage,use_captcha):
-    global generated
-    global accounts
+    
+    
 
     try:
         config = open("config.txt", "r+").readlines()
@@ -208,35 +208,39 @@ def Bot(collage,use_captcha):
     time.sleep(3)
 
     if collage == "1":
-        Coastline(name,pw,email,first,last,number,ssn, street, city, zipcode)
+        resp = Coastline(name,pw,email,first,last,number,ssn, street, city, zipcode)
     elif collage == "2":
-        Coastline(name,pw,email,first,last,number,ssn, street, city, zipcode)
+        resp = Coastline(name,pw,email,first,last,number,ssn, street, city, zipcode)
     elif collage == "3":
-        Crafton(name,pw,email,first,last,number,ssn, street, city, zipcode)
+        resp = Crafton(name,pw,email,first,last,number,ssn, street, city, zipcode)
     elif collage == "4":
-        San_Bernardino(name,pw,email,first,last,number,ssn, street, city, zipcode)
+        resp = San_Bernardino(name,pw,email,first,last,number,ssn, street, city, zipcode)
     elif collage == "5":
-        Santa_Monica(name,pw,email,first,last,number,ssn, street, city, zipcode)
+        resp = Santa_Monica(name,pw,email,first,last,number,ssn, street, city, zipcode)
     elif collage == "6":
-        Solano(name,pw,email,first,last,number,ssn, street, city, zipcode)
+        resp = Solano(name,pw,email,first,last,number,ssn, street, city, zipcode)
     elif collage == "7":
-        ccsf(name,pw,email,first,last,number,ssn, street, city, zipcode)
+        resp = ccsf(name,pw,email,first,last,number,ssn, street, city, zipcode)
     elif collage == "8":
-        Canada(name,pw,email,first,last,number,ssn, street, city, zipcode)
+        resp = Canada(name,pw,email,first,last,number,ssn, street, city, zipcode)
     elif collage == "9":
-        barbara(name,pw,email,first,last,number,ssn, street, city, zipcode)
+        resp = barbara(name,pw,email,first,last,number,ssn, street, city, zipcode)
     elif collage == "10":
-        gavilan(name,pw,email,first,last,number,ssn, street, city, zipcode)
+        resp = gavilan(name,pw,email,first,last,number,ssn, street, city, zipcode)
     elif collage == "11":
-        orange(name,pw,email,first,last,number,ssn, street, city, zipcode)
+        resp = orange(name,pw,email,first,last,number,ssn, street, city, zipcode)
     else:
         print("Fuck")
         exit()
-#first, last, number, ssn, street, city, zipcode
+    
+    accounts += 1
+    with open("accountsb.txt", "a+") as file:
+        file.write(resp[0] + ":" + resp[1] + "  Email:" + resp[2] + " " + resp[3] + " " + resp[4] + " SSN: " + resp[5] + " number: " + resp[6])
+        file.write("\n")
 
 def orange(name,pw,email,first,last,number,ssn, street, city, zipcode):
-    global generated
-    global accounts
+    
+    
 
 
     driver = webdriver.Firefox(executable_path= geckopath)
@@ -382,8 +386,8 @@ def orange(name,pw,email,first,last,number,ssn, street, city, zipcode):
 
 
 def gavilan(name,pw,email,first,last,number,ssn, street, city, zipcode):
-    global generated
-    global accounts
+    
+    
 
 
     driver = webdriver.Firefox(executable_path= geckopath)
@@ -532,8 +536,8 @@ def gavilan(name,pw,email,first,last,number,ssn, street, city, zipcode):
 
 
 def barbara(name,pw,email,first,last,number,ssn, street, city, zipcode):
-    global generated
-    global accounts
+    
+    
 
 
     driver = webdriver.Firefox(executable_path= geckopath)
@@ -684,8 +688,8 @@ def barbara(name,pw,email,first,last,number,ssn, street, city, zipcode):
 
 
 def Canada(name,pw,email,first,last,number,ssn, street, city, zipcode):
-    global generated
-    global accounts
+    
+    
 
     driver = webdriver.Firefox(executable_path= geckopath)
     driver.get("https://www.opencccapply.net/uPortal/f/u63l1s1000/normal/render.uP")
@@ -814,8 +818,8 @@ def Canada(name,pw,email,first,last,number,ssn, street, city, zipcode):
     return (name,pw,email,first,last,ssn,number)
 
 def Solano(name,pw,email,first,last,number,ssn, street, city, zipcode):
-    global generated
-    global accounts
+    
+    
 
     driver = webdriver.Firefox(executable_path= geckopath)
     driver.get("https://www.opencccapply.net/uPortal/f/u63l1s1000/normal/render.uP")
@@ -947,8 +951,8 @@ def Solano(name,pw,email,first,last,number,ssn, street, city, zipcode):
     return (name,pw,email,first,last,ssn,number)
 
 def ccsf(name,pw,email,first,last,number,ssn, street, city, zipcode):
-    global generated
-    global accounts
+    
+    
 
     driver = webdriver.Firefox(executable_path= geckopath)
     driver.get("https://www.opencccapply.net/uPortal/f/u63l1s1000/normal/render.uP")
@@ -1091,8 +1095,8 @@ def ccsf(name,pw,email,first,last,number,ssn, street, city, zipcode):
 
 
 def San_Bernardino(name,pw,email,first,last,number,ssn, street, city, zipcode):
-    global generated
-    global accounts
+    
+    
 
     driver = webdriver.Firefox(executable_path= geckopath)
     driver.get("https://www.opencccapply.net/uPortal/f/u63l1s1000/normal/render.uP")
@@ -1243,8 +1247,8 @@ def San_Bernardino(name,pw,email,first,last,number,ssn, street, city, zipcode):
 
 
 def Crafton(name,pw,email,first,last,number,ssn, street, city, zipcode):
-    global generated
-    global accounts
+    
+    
 
     driver = webdriver.Firefox(executable_path= geckopath)
     driver.get("https://www.opencccapply.net/uPortal/f/u63l1s1000/normal/render.uP")
@@ -1395,8 +1399,8 @@ def Crafton(name,pw,email,first,last,number,ssn, street, city, zipcode):
     return (name,pw,email,first,last,ssn,number)
 
 def San_Bernardino(name,pw,email,first,last,number,ssn, street, city, zipcode):
-    global generated
-    global accounts
+    
+    
 
     driver = webdriver.Firefox(executable_path= geckopath)
     driver.get("https://www.opencccapply.net/uPortal/f/u63l1s1000/normal/render.uP")
@@ -1546,8 +1550,8 @@ def San_Bernardino(name,pw,email,first,last,number,ssn, street, city, zipcode):
 
 
 def Santa_Monica(name,pw,email,first,last,number,ssn, street, city, zipcode):
-    global generated
-    global accounts
+    
+    
 
 
 
@@ -1695,11 +1699,6 @@ def Santa_Monica(name,pw,email,first,last,number,ssn, street, city, zipcode):
 
 
 def Coastline(name,pw,email,first,last,number,ssn, street, city, zipcode):
-    global generated
-    global accounts
-
-
-
     driver = webdriver.Firefox(executable_path= geckopath)
     driver.get("https://www.opencccapply.net/uPortal/f/u63l1s1000/normal/render.uP")
 
