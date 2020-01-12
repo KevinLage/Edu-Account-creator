@@ -378,7 +378,7 @@ def orange(name,pw,email,first,last,number,ssn, street, city, zipcode):
     time.sleep(3)
     
     
-    with open("accountsb.txt", "a+") as file:
+    
     
     return (name,pw,email,first,last,ssn,number)
 
@@ -530,7 +530,7 @@ def gavilan(name,pw,email,first,last,number,ssn, street, city, zipcode):
     time.sleep(3)
     
     
-    with open("accountsb.txt", "a+") as file:
+    
     
     return (name,pw,email,first,last,ssn,number)
 
@@ -682,7 +682,7 @@ def barbara(name,pw,email,first,last,number,ssn, street, city, zipcode):
     time.sleep(3)
     
     
-    with open("accountsb.txt", "a+") as file:
+    
     
     return (name,pw,email,first,last,ssn,number)
 
@@ -813,7 +813,7 @@ def Canada(name,pw,email,first,last,number,ssn, street, city, zipcode):
     time.sleep(3)
     
     
-    with open("accountsb.txt", "a+") as file:
+    
     
     return (name,pw,email,first,last,ssn,number)
 
@@ -946,7 +946,7 @@ def Solano(name,pw,email,first,last,number,ssn, street, city, zipcode):
     time.sleep(3)
     
     
-    with open("accountsb.txt", "a+") as file:
+    
     
     return (name,pw,email,first,last,ssn,number)
 
@@ -1086,7 +1086,7 @@ def ccsf(name,pw,email,first,last,number,ssn, street, city, zipcode):
     time.sleep(3)
     
     
-    with open("accountsb.txt", "a+") as file:
+    
     
     return (name,pw,email,first,last,ssn,number)
 
@@ -1240,7 +1240,7 @@ def San_Bernardino(name,pw,email,first,last,number,ssn, street, city, zipcode):
     time.sleep(3)
     
     
-    with open("accountsb.txt", "a+") as file:
+    
     
     return (name,pw,email,first,last,ssn,number)
 
@@ -1394,7 +1394,7 @@ def Crafton(name,pw,email,first,last,number,ssn, street, city, zipcode):
     time.sleep(3)
     
     
-    with open("accountsb.txt", "a+") as file:
+    
     
     return (name,pw,email,first,last,ssn,number)
 
@@ -1544,7 +1544,7 @@ def San_Bernardino(name,pw,email,first,last,number,ssn, street, city, zipcode):
     time.sleep(3)
     
     
-    with open("accountsb.txt", "a+") as file:
+    
     
     return (name,pw,email,first,last,ssn,number)
 
@@ -1692,7 +1692,7 @@ def Santa_Monica(name,pw,email,first,last,number,ssn, street, city, zipcode):
     time.sleep(3)
     
     
-    with open("accountsb.txt", "a+") as file:
+    
     
     return (name,pw,email,first,last,ssn,number)
     
