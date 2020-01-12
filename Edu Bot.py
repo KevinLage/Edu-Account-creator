@@ -74,6 +74,8 @@ def createaccount(collage,use_captcha):
     except:
         createaccount(collage, use_captcha)
 
+def randomSSN(size=4, chars=string.digits):
+    return ''.join(random.choice(chars) for i in range(size))
 
 def Bot(collage,use_captcha):
     
@@ -112,13 +114,13 @@ def Bot(collage,use_captcha):
     first = datafake.name["first"]
     last = datafake.name["last"]
     number = datafake.phone
-    ssn = datafake.SSN
+    ssn = str(str(datafake.SSN) + str(randomSSN())).replace("X","")
     street = datafake.addy["addynum"] + " " + datafake.addy["street"]
     city = datafake.addy["province"]
     zipcode = datafake.addy["zip"]
-    
+
     pw = datafake.password
-    name = datafake.username
+    name = datafake.username + randomSSN()
     
     if fullmail == 0:
         email = name + mail
@@ -227,7 +229,7 @@ def Bot(collage,use_captcha):
 
 
 
-        lol, moin = r.text.split("|")
+        _, moin = r.text.split("|")
         time.sleep(20)
 
         url2 = "https://2captcha.com/res.php?key=" + captcha + "&action=get&id=" + moin
@@ -239,7 +241,7 @@ def Bot(collage,use_captcha):
             print("[*] Waiting for 2Captcha")
             time.sleep(3)
         try:
-            ok, key = r.text.split("|")
+            _, key = r.text.split("|")
         except:
             print(r.text)
 
@@ -1995,7 +1997,7 @@ index = int(input("")) - 1
 
 print("[*] " + collages[index])
 
-input()
+#input()
 
 collage = str(index + 1)
 
