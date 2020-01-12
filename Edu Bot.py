@@ -233,7 +233,9 @@ def Bot(collage,use_captcha):
         print("Fuck")
         exit()
     
-    accounts += 1
+    
+    global generated
+    generated += 1
     with open("accountsb.txt", "a+") as file:
         file.write(resp[0] + ":" + resp[1] + "  Email:" + resp[2] + " " + resp[3] + " " + resp[4] + " SSN: " + resp[5] + " number: " + resp[6])
         file.write("\n")
