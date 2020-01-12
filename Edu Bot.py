@@ -97,12 +97,9 @@ def Bot(collage,use_captcha):
         fullmail = 0
         pass
 
-    def randomName(size=10, chars=string.ascii_letters + string.digits):
-        return ''.join(random.choice(chars) for i in range(size))
 
 
-    def randomPassword(size=14, chars=string.ascii_letters + string.digits):
-        return ''.join(random.choice(chars) for i in range(size))
+
 
 
     driver = webdriver.Firefox(executable_path=geckopath)
@@ -124,7 +121,7 @@ def Bot(collage,use_captcha):
     name = datafake.username
     
     if fullmail == 0:
-        email = randomName() + mail
+        email = name + mail
     else:
         email = full_mail
 
