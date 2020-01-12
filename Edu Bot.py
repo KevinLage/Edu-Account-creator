@@ -227,7 +227,7 @@ def Bot(collage,use_captcha):
 
 
 
-        lol, moin = r.text.split("|")
+        _, moin = r.text.split("|")
         time.sleep(20)
 
         url2 = "https://2captcha.com/res.php?key=" + captcha + "&action=get&id=" + moin
@@ -239,7 +239,7 @@ def Bot(collage,use_captcha):
             print("[*] Waiting for 2Captcha")
             time.sleep(3)
         try:
-            ok, key = r.text.split("|")
+            _, key = r.text.split("|")
         except:
             print(r.text)
 
@@ -1995,7 +1995,7 @@ index = int(input("")) - 1
 
 print("[*] " + collages[index])
 
-input()
+#input()
 
 collage = str(index + 1)
 
