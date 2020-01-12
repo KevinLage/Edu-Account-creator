@@ -32,7 +32,7 @@ def Bot(collage,use_captcha):
         pass
     try:
         captcha = config[1]
-        captcha, gay = captcha.split("\n")
+        captcha, _ = captcha.split("\n")
     except:
         pass
     try:
@@ -372,11 +372,11 @@ def orange(name,pw,email,first,last,number,ssn, street, city, zipcode):
     time.sleep(1)
     driver.quit()
     time.sleep(3)
-    generated += 1
-    print(generated , "/" , accounts , " Accounts are done!")
+    
+    
     with open("accountsb.txt", "a+") as file:
-        file.write(name + ":" + pw + "  Email:" + email + " " + first + " " + last + " SSN: " + ssn + " number: " + number)
-        file.write("\n")
+    
+    return (name,pw,email,first,last,ssn,number)
 
 
 
@@ -524,11 +524,11 @@ def gavilan(name,pw,email,first,last,number,ssn, street, city, zipcode):
     time.sleep(1)
     driver.quit()
     time.sleep(3)
-    generated += 1
-    print(generated , "/" , accounts , " Accounts are done!")
+    
+    
     with open("accountsb.txt", "a+") as file:
-        file.write(name + ":" + pw + "  Email:" + email + " " + first + " " + last + " SSN: " + ssn + " number: " + number)
-        file.write("\n")
+    
+    return (name,pw,email,first,last,ssn,number)
 
 
 def barbara(name,pw,email,first,last,number,ssn, street, city, zipcode):
@@ -676,11 +676,11 @@ def barbara(name,pw,email,first,last,number,ssn, street, city, zipcode):
     time.sleep(1)
     driver.quit()
     time.sleep(3)
-    generated += 1
-    print(generated , "/" , accounts , " Accounts are done!")
+    
+    
     with open("accountsb.txt", "a+") as file:
-        file.write(name + ":" + pw + "  Email:" + email + " " + first + " " + last + " SSN: " + ssn + " number: " + number)
-        file.write("\n")
+    
+    return (name,pw,email,first,last,ssn,number)
 
 
 def Canada(name,pw,email,first,last,number,ssn, street, city, zipcode):
@@ -807,11 +807,11 @@ def Canada(name,pw,email,first,last,number,ssn, street, city, zipcode):
     time.sleep(1)
     driver.quit()
     time.sleep(3)
-    generated += 1
-    print(generated , "/" , accounts , " Accounts are done!")
+    
+    
     with open("accountsb.txt", "a+") as file:
-        file.write(name + ":" + pw + "  Email:" + email + " " + first + " " + last + " SSN: " + ssn + " number: " + number)
-        file.write("\n")
+    
+    return (name,pw,email,first,last,ssn,number)
 
 def Solano(name,pw,email,first,last,number,ssn, street, city, zipcode):
     global generated
@@ -940,11 +940,11 @@ def Solano(name,pw,email,first,last,number,ssn, street, city, zipcode):
     time.sleep(1)
     driver.quit()
     time.sleep(3)
-    generated += 1
-    print(generated , "/" , accounts , " Accounts are done!")
+    
+    
     with open("accountsb.txt", "a+") as file:
-        file.write(name + ":" + pw + "  Email:" + email + " " + first + " " + last + " SSN: " + ssn + " number: " + number)
-        file.write("\n")
+    
+    return (name,pw,email,first,last,ssn,number)
 
 def ccsf(name,pw,email,first,last,number,ssn, street, city, zipcode):
     global generated
@@ -1080,11 +1080,11 @@ def ccsf(name,pw,email,first,last,number,ssn, street, city, zipcode):
     time.sleep(1)
     driver.quit()
     time.sleep(3)
-    generated += 1
-    print(generated , "/" , accounts , " Accounts are done!")
+    
+    
     with open("accountsb.txt", "a+") as file:
-        file.write(name + ":" + pw + "  Email:" + email + " " + first + " " + last + " SSN: " + ssn + " number: " + number)
-        file.write("\n")
+    
+    return (name,pw,email,first,last,ssn,number)
 
 
 
@@ -1234,11 +1234,11 @@ def San_Bernardino(name,pw,email,first,last,number,ssn, street, city, zipcode):
     time.sleep(1)
     driver.quit()
     time.sleep(3)
-    generated += 1
-    print(generated , "/" , accounts , " Accounts are done!")
+    
+    
     with open("accountsb.txt", "a+") as file:
-        file.write(name + ":" + pw + "  Email:" + email + " " + first + " " + last + " SSN: " + ssn + " number: " + number)
-        file.write("\n")
+    
+    return (name,pw,email,first,last,ssn,number)
 
 
 
@@ -1388,11 +1388,11 @@ def Crafton(name,pw,email,first,last,number,ssn, street, city, zipcode):
     time.sleep(1)
     driver.quit()
     time.sleep(3)
-    generated += 1
-    print(generated , "/" , accounts , " Accounts are done!")
+    
+    
     with open("accountsb.txt", "a+") as file:
-        file.write(name + ":" + pw + "  Email:" + email + " " + first + " " + last + " SSN: " + ssn + " number: " + number)
-        file.write("\n")
+    
+    return (name,pw,email,first,last,ssn,number)
 
 def San_Bernardino(name,pw,email,first,last,number,ssn, street, city, zipcode):
     global generated
@@ -1538,11 +1538,11 @@ def San_Bernardino(name,pw,email,first,last,number,ssn, street, city, zipcode):
     time.sleep(1)
     driver.quit()
     time.sleep(3)
-    generated += 1
-    print(generated , "/" , accounts , " Accounts are done!")
+    
+    
     with open("accountsb.txt", "a+") as file:
-        file.write(name + ":" + pw + "  Email:" + email + " " + first + " " + last + " SSN: " + ssn + " number: " + number)
-        file.write("\n")
+    
+    return (name,pw,email,first,last,ssn,number)
 
 
 def Santa_Monica(name,pw,email,first,last,number,ssn, street, city, zipcode):
@@ -1686,12 +1686,12 @@ def Santa_Monica(name,pw,email,first,last,number,ssn, street, city, zipcode):
     time.sleep(1)
     driver.quit()
     time.sleep(3)
-    generated += 1
-    print(generated , "/" , accounts , " Accounts are done!")
+    
+    
     with open("accountsb.txt", "a+") as file:
-        file.write(name + ":" + pw + "  Email:" + email + " " + first + " " + last + " SSN: " + ssn + " number: " + number)
-        file.write("\n")
-
+    
+    return (name,pw,email,first,last,ssn,number)
+    
 
 
 def Coastline(name,pw,email,first,last,number,ssn, street, city, zipcode):
@@ -1879,11 +1879,7 @@ def Coastline(name,pw,email,first,last,number,ssn, street, city, zipcode):
     time.sleep(1)
     driver.quit()
     time.sleep(3)
-    generated += 1
-    print(generated , "/" , accounts , " Accounts are done!")
-    with open("accountsb.txt", "a+") as file:
-        file.write(name + ":" + pw + "  Email:" + email + " " + first + " " + last + " SSN: " + ssn + " number: " + number)
-        file.write("\n")
+    return (name,pw,email,first,last,ssn,number)
 
 if platform.system() == "Windows": #checking OS
     geckopath = "./geckodriver.exe"
@@ -1914,7 +1910,7 @@ by Exploit
 
 accounts = int(input("How many Accounts do u want?\n"))
 
-use_captcha = input("[1]2Captcha \n[2]Manually\n")
+use_captcha = input("1. 2Captcha \n2. Manually\n")
 if use_captcha == "1":
     print("2Captcha!\n")
 elif use_captcha == "2":
@@ -1925,35 +1921,22 @@ else:
     exit()
 
 
-collage = input("Which Collage?\n1. Sacramento (Google Drive) \n2. Coastline (Azure RDP / maybe broke)\n3. Crafton Hills \n4. San Bernardino\n5. Santa Monica\n6. Solano\n7. CCSF\n8. Canada College\n9. Santa Barbara\n10. Gavilan College\n11. Orange Coast College\n")
+#collage = input("Which Collage?\n1. Sacramento (Google Drive) \n2. Coastline (Azure RDP / maybe broke)\n3. Crafton Hills \n4. San Bernardino\n5. Santa Monica\n6. Solano\n7. CCSF\n8. Canada College\n9. Santa Barbara\n10. Gavilan College\n11. Orange Coast College\n")
 
-if collage == "1":
-    print("[*] Sacremento")
-elif collage == "2":
-    print("[*] Coastline")
-elif collage == "3":
-    print("[*] Crafton Hills")
-elif collage == "4":
-    print("[*] San Bernardino")
-elif collage == "5":
-    print("[*] Santa Monica")
-elif collage == "6":
-    print("[*] Solano Community")
-elif collage == "7":
-    print("[*] City College of San Francisco ")
-elif collage == "8":
-    print("[*] Canada Collage")
-elif collage == "9":
-    print("[*] Santa Barbara City College")
-elif collage == "10":
-    print("[*] Gavilan College")
-elif collage == "11":
-    print("[*] Orange Coast College")
-else:
-    print("Wrong input")
-    time.sleep(3)
-    exit()
+collages = ["Sacremento","Coastline","Crafton Hills","San Bernardino","Santa Monica","Solano Community","City College of San Francisco","Canada Collage","Santa Barbara City College","Gavilan College","Orange Coast College"]
 
+print("Which Collage?")
+
+for index,name in enumerate(collages): 
+    print(str(index + 1) + ". " + name)
+
+index = int(input("")) - 1
+
+print("[*] " + collages[index])
+
+input()
+
+collage = str(index + 1)
 
 while accounts > generated:
     createaccount(collage, use_captcha)
