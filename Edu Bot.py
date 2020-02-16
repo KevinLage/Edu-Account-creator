@@ -350,6 +350,8 @@ def Bot(collage, use_captcha):
         file.write(resp[0] + ":" + resp[1] + "  Email:" + resp[2] + " " +
                    resp[3] + " " + resp[4] + " SSN: " + resp[5] + " number: " + resp[6])
         file.write("\n")
+    print("Successfully created ", generated,
+          " student account(s), Please check accountsb.txt file for details. Wait a few days for college to accept your application, check your temp mail once in while.\n")
 
 
 def orange(name, pw, email, first, last, number, ssn, street, city, zipcode):
