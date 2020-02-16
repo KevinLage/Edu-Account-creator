@@ -18,68 +18,104 @@ class FakeNameGenerator():
         self.html = ""
 
     def GenerateIdenity(self):
-        self.html = requests.get("https://www.fakenamegenerator.com/",headers={"User-Agent":"Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:70.0) Gecko/20100101 Firefox/70.0"}).text
-        self.name = {"completename":self.html.split('<div class="address">')[1].split('<h3>')[1].split('</h3>')[0],"first":self.html.split('<div class="address">')[1].split('<h3>')[1].split('</h3>')[0].split(" ")[0],"last":self.html.split('<div class="address">')[1].split('<h3>')[1].split('</h3>')[0].split(" ")[-1]}
+        self.html = requests.get("https://www.fakenamegenerator.com/", headers={
+                                 "User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:70.0) Gecko/20100101 Firefox/70.0"}).text
+        self.name = {"completename": self.html.split('<div class="address">')[1].split('<h3>')[1].split('</h3>')[0], "first": self.html.split('<div class="address">')[
+            1].split('<h3>')[1].split('</h3>')[0].split(" ")[0], "last": self.html.split('<div class="address">')[1].split('<h3>')[1].split('</h3>')[0].split(" ")[-1]}
 
-        addy = self.html.split('<div class="adr">')[1].split("                                        ")[1].split("                                        </div>")[0]
+        addy = self.html.split('<div class="adr">')[1].split("                                        ")[
+            1].split("                                        </div>")[0]
         addynum = addy.split(" ")[0]
-        streetlist = self.html.split('<div class="adr">')[1].split("                                        ")[1].split("                                        </div>")[0].split("<br />")[:1][0].split(" ")[1:]
+        streetlist = self.html.split('<div class="adr">')[1].split("                                        ")[
+            1].split("                                        </div>")[0].split("<br />")[:1][0].split(" ")[1:]
         street = ""
 
         province = addy.split('<br />')[1].split(",")[0]
         ZIP = addy.split(", ")[1].split('   ')[0]
         for i in streetlist:
             street = street + " " + i
-        self.addy = {"addynum":addynum,"street":street[1:],"province":province,"zip":ZIP}
+        self.addy = {"addynum": addynum,
+                     "street": street[1:], "province": province, "zip": ZIP}
 
-        self.SSN = self.html.split('tal"><dt>SSN</dt><dd>')[1].split(' <div class="adtl">')[0]
-        self.phone = self.html.split("<dt>Phone</dt>")[1].split("</dd>")[0].split("<dd>")[1]
-        self.phoneprefix = "+" + self.html.split("<dt>Country code</dt>")[1].split("</dd>")[0].split("<dd>")[1]
-        birthday = "+" + self.html.split("<dt>Birthday</dt>")[1].split("</dd>")[0].split("<dd>")[1]
-        Month = birthday.split(" ")[0].replace("+","")
-        Day = birthday.split(" ")[1].replace(",","")
+        self.SSN = self.html.split(
+            'tal"><dt>SSN</dt><dd>')[1].split(' <div class="adtl">')[0]
+        self.phone = self.html.split(
+            "<dt>Phone</dt>")[1].split("</dd>")[0].split("<dd>")[1]
+        self.phoneprefix = "+" + \
+            self.html.split(
+                "<dt>Country code</dt>")[1].split("</dd>")[0].split("<dd>")[1]
+        birthday = "+" + \
+            self.html.split(
+                "<dt>Birthday</dt>")[1].split("</dd>")[0].split("<dd>")[1]
+        Month = birthday.split(" ")[0].replace("+", "")
+        Day = birthday.split(" ")[1].replace(",", "")
         Year = birthday.split(" ")[-1]
-        self.birthday = {"Day":Day,"Month":Month,"Year":Year}
-        self.age = self.html.split("<dt>Age</dt>")[1].split(" years old</dd>")[0].split("<dd>")[1]
-        self.tropicalzodiac = self.html.split("<dt>Tropical zodiac</dt>")[1].split("</dd>")[0].split("<dd>")[1]
-        self.email = self.html.split('<dt>Email Address</dt>')[1].split('<dd>')[1].split('        ')[0]
-        self.username = self.html.split("<dt>Username</dt>")[1].split("</dd>")[0].split("<dd>")[1]
-        self.password = self.html.split("<dt>Password</dt>")[1].split("</dd>")[0].split("<dd>")[1]
-        self.website = self.html.split("<dt>Website</dt>")[1].split("</dd>")[0].split("<dd>")[1]
-        self.useragent = self.html.split("<dt>Browser user agent</dt>")[1].split("</dd>")[0].split("<dd>")[1]
-        self.cardtype = self.html.split('<h3 class="hh3">Finance</h3>')[1].split('<dt>')[1].split('</dt>')[0]
-        self.card = self.html.split(f"<dt>{self.cardtype}</dt>")[1].split("</dd>")[0].split("<dd>")[1]
-        self.exp = self.html.split("<dt>Expires</dt>")[1].split("</dd>")[0].split("<dd>")[1]
+        self.birthday = {"Day": Day, "Month": Month, "Year": Year}
+        self.age = self.html.split(
+            "<dt>Age</dt>")[1].split(" years old</dd>")[0].split("<dd>")[1]
+        self.tropicalzodiac = self.html.split(
+            "<dt>Tropical zodiac</dt>")[1].split("</dd>")[0].split("<dd>")[1]
+        self.email = self.html.split(
+            '<dt>Email Address</dt>')[1].split('<dd>')[1].split('        ')[0]
+        self.username = self.html.split(
+            "<dt>Username</dt>")[1].split("</dd>")[0].split("<dd>")[1]
+        self.password = self.html.split(
+            "<dt>Password</dt>")[1].split("</dd>")[0].split("<dd>")[1]
+        self.website = self.html.split(
+            "<dt>Website</dt>")[1].split("</dd>")[0].split("<dd>")[1]
+        self.useragent = self.html.split(
+            "<dt>Browser user agent</dt>")[1].split("</dd>")[0].split("<dd>")[1]
+        self.cardtype = self.html.split(
+            '<h3 class="hh3">Finance</h3>')[1].split('<dt>')[1].split('</dt>')[0]
+        self.card = self.html.split(
+            f"<dt>{self.cardtype}</dt>")[1].split("</dd>")[0].split("<dd>")[1]
+        self.exp = self.html.split(
+            "<dt>Expires</dt>")[1].split("</dd>")[0].split("<dd>")[1]
         try:
-            self.CVC = self.html.split("<dt>CVC2</dt>")[1].split("</dd>")[0].split("<dd>")[1]
+            self.CVC = self.html.split(
+                "<dt>CVC2</dt>")[1].split("</dd>")[0].split("<dd>")[1]
         except:
-            self.CVC = self.html.split("<dt>CVV2</dt>")[1].split("</dd>")[0].split("<dd>")[1]
-        self.company = self.html.split("<dt>Company</dt>")[1].split("</dd>")[0].split("<dd>")[1]
-        self.job = self.html.split("<dt>Occupation</dt>")[1].split("</dd>")[0].split("<dd>")[1]
-        self.height = self.html.split("<dt>Height</dt>")[1].split("</dd>")[0].split("<dd>")[1]
-        self.weight = self.html.split("<dt>Weight</dt>")[1].split("</dd>")[0].split("<dd>")[1]
-        self.bloodtype = self.html.split("<dt>Blood type</dt>")[1].split("</dd>")[0].split("<dd>")[1]
-        self.UPSTrackingnum = self.html.split("<dt>UPS tracking number</dt>")[1].split("</dd>")[0].split("<dd>")[1]
-        self.MoneyGram = self.html.split("<dt>MoneyGram MTCN</dt>")[1].split("</dd>")[0].split("<dd>")[1]
-        self.WesternUnion = self.html.split("<dt>Western Union MTCN</dt>")[1].split("</dd>")[0].split("<dd>")[1]
-        self.favcolor = self.html.split("<dt>Favorite color</dt>")[1].split("</dd>")[0].split("<dd>")[1]
-        self.car = self.html.split("<dt>Vehicle</dt>")[1].split("</dd>")[0].split("<dd>")[1]
-        self.GUID = self.html.split("<dt>GUID</dt>")[1].split("</dd>")[0].split("<dd>")[1]
+            self.CVC = self.html.split(
+                "<dt>CVV2</dt>")[1].split("</dd>")[0].split("<dd>")[1]
+        self.company = self.html.split(
+            "<dt>Company</dt>")[1].split("</dd>")[0].split("<dd>")[1]
+        self.job = self.html.split(
+            "<dt>Occupation</dt>")[1].split("</dd>")[0].split("<dd>")[1]
+        self.height = self.html.split(
+            "<dt>Height</dt>")[1].split("</dd>")[0].split("<dd>")[1]
+        self.weight = self.html.split(
+            "<dt>Weight</dt>")[1].split("</dd>")[0].split("<dd>")[1]
+        self.bloodtype = self.html.split(
+            "<dt>Blood type</dt>")[1].split("</dd>")[0].split("<dd>")[1]
+        self.UPSTrackingnum = self.html.split(
+            "<dt>UPS tracking number</dt>")[1].split("</dd>")[0].split("<dd>")[1]
+        self.MoneyGram = self.html.split(
+            "<dt>MoneyGram MTCN</dt>")[1].split("</dd>")[0].split("<dd>")[1]
+        self.WesternUnion = self.html.split(
+            "<dt>Western Union MTCN</dt>")[1].split("</dd>")[0].split("<dd>")[1]
+        self.favcolor = self.html.split(
+            "<dt>Favorite color</dt>")[1].split("</dd>")[0].split("<dd>")[1]
+        self.car = self.html.split(
+            "<dt>Vehicle</dt>")[1].split("</dd>")[0].split("<dd>")[1]
+        self.GUID = self.html.split(
+            "<dt>GUID</dt>")[1].split("</dd>")[0].split("<dd>")[1]
+
 
 generated = 0
 
-def createaccount(collage,use_captcha):
+
+def createaccount(collage, use_captcha):
     try:
         Bot(collage, use_captcha)
     except:
         createaccount(collage, use_captcha)
 
+
 def randomSSN(size=4, chars=string.digits):
     return ''.join(random.choice(chars) for i in range(size))
 
-def Bot(collage,use_captcha):
-    
-    
+
+def Bot(collage, use_captcha):
 
     try:
         config = open("config.txt", "r+").readlines()
@@ -99,29 +135,25 @@ def Bot(collage,use_captcha):
         fullmail = 0
         pass
 
-
-
-
-
-
     driver = webdriver.Firefox(executable_path=geckopath)
 
-    driver.get("https://www.openccc.net/uPortal/p/AccountCreation.ctf1/max/render.uP?pP_execution=e1s2")
+    driver.get(
+        "https://www.openccc.net/uPortal/p/AccountCreation.ctf1/max/render.uP?pP_execution=e1s2")
 
     datafake = FakeNameGenerator()
     datafake.GenerateIdenity()
-    
+
     first = datafake.name["first"]
     last = datafake.name["last"]
     number = datafake.phone
-    ssn = str(str(datafake.SSN) + str(randomSSN())).replace("X","")
+    ssn = str(str(datafake.SSN) + str(randomSSN())).replace("X", "")
     street = datafake.addy["addynum"] + " " + datafake.addy["street"]
     city = datafake.addy["province"]
     zipcode = datafake.addy["zip"]
 
     pw = datafake.password
     name = datafake.username + randomSSN()
-    
+
     if fullmail == 0:
         email = name + mail
     else:
@@ -131,7 +163,6 @@ def Bot(collage,use_captcha):
 
     register_button = driver.find_element_by_name("_eventId_continue")
     register_button.click()
-
 
     first_name = driver.find_element_by_name("firstName")
     first_name.send_keys(first)
@@ -161,13 +192,11 @@ def Bot(collage,use_captcha):
     driver.find_element_by_id("inputSsnConfirm").send_keys(ssnlol)
     time.sleep(1)
     driver.find_element_by_id("accountFormSubmit").click()
-        
+
     print("[*] Page 1/3 Done!")
 
     time.sleep(4)
 
-
-    
     driver.find_element_by_id("inputEmail").send_keys(email)
     driver.find_element_by_id("inputEmailConfirm").send_keys(email)
     time.sleep(4)
@@ -180,15 +209,6 @@ def Bot(collage,use_captcha):
     time.sleep(4)
     driver.find_element_by_id("accountFormSubmit").click()
 
-
-
-
-
-
-
-    
-
-
     try:
         driver.find_element_by_id("inputUserId").send_keys(name)
         print("[*] Page 2/3 Done!")
@@ -196,12 +216,11 @@ def Bot(collage,use_captcha):
         driver.find_element_by_id("error-modal-ok-button").click()
         driver.find_element_by_id("inputAddressValidationOverride").click()
         driver.find_element_by_id("accountFormSubmit").click()
-        
-    print("[*] Page 2/3 Done!")   
+
+    print("[*] Page 2/3 Done!")
     driver.find_element_by_id("inputUserId").send_keys(name)
     driver.find_element_by_id("inputPasswd").send_keys(pw)
     driver.find_element_by_id("inputPasswdConfirm").send_keys(pw)
-
 
     driver.find_element_by_id("inputPin").send_keys("0420")
     driver.find_element_by_id("inputPinConfirm").send_keys("0420")
@@ -215,19 +234,14 @@ def Bot(collage,use_captcha):
     driver.find_elements_by_tag_name("option")[42].click()
     driver.find_element_by_id("inputSecurityAnswer3").send_keys("Tesla 3")
 
-
-
-
     print("[*] Bypassing the Captcha!")
 
     if use_captcha == "1":
 
-
-        url = "https://2captcha.com/in.php?key=" + captcha + "&method=userrecaptcha&json=0&googlekey=6LeaXhITAAAAACiHR6YSn1YKAUrrTZTLtjxuwYx6&pageurl=https://www.openccc.net/uPortal/p/AccountCreation.ctf1/max/render.uP?pP_execution=e1s4"
+        url = "https://2captcha.com/in.php?key=" + captcha + \
+            "&method=userrecaptcha&json=0&googlekey=6LeaXhITAAAAACiHR6YSn1YKAUrrTZTLtjxuwYx6&pageurl=https://www.openccc.net/uPortal/p/AccountCreation.ctf1/max/render.uP?pP_execution=e1s4"
 
         r = requests.get(url)
-
-
 
         _, moin = r.text.split("|")
         time.sleep(20)
@@ -236,7 +250,7 @@ def Bot(collage,use_captcha):
         r = requests.get(url2)
         while "CAPCHA_NOT_READY" in r.text:
 
-            url2 = "https://2captcha.com/res.php?key=" +captcha + "&action=get&id=" + moin
+            url2 = "https://2captcha.com/res.php?key=" + captcha + "&action=get&id=" + moin
             r = requests.get(url2)
             print("[*] Waiting for 2Captcha")
             time.sleep(3)
@@ -245,8 +259,10 @@ def Bot(collage,use_captcha):
         except:
             print(r.text)
 
-        command = 'document.getElementById("g-recaptcha-response").innerHTML="' + key + '";'
-        driver.execute_script("document.getElementsByName('captchaResponse')[0].setAttribute('type', 'shown');")
+        command = 'document.getElementById("g-recaptcha-response").innerHTML="' + \
+            key + '";'
+        driver.execute_script(
+            "document.getElementsByName('captchaResponse')[0].setAttribute('type', 'shown');")
         driver.find_element_by_name("captchaResponse").send_keys(key)
         time.sleep(5)
         driver.execute_script(command)
@@ -257,7 +273,6 @@ def Bot(collage,use_captcha):
             captcha_solved = input("[Y]Solved?\n")
     else:
         print("Error")
-
 
     time.sleep(3)
     driver.find_element_by_id("accountFormSubmit").click()
@@ -270,52 +285,75 @@ def Bot(collage,use_captcha):
     time.sleep(3)
 
     if collage == "1":
-        resp = Coastline(name,pw,email,first,last,number,ssn, street, city, zipcode)
+        resp = Coastline(name, pw, email, first, last,
+                         number, ssn, street, city, zipcode)
     elif collage == "2":
-        resp = Coastline(name,pw,email,first,last,number,ssn, street, city, zipcode)
+        resp = Coastline(name, pw, email, first, last,
+                         number, ssn, street, city, zipcode)
     elif collage == "3":
-        resp = Crafton(name,pw,email,first,last,number,ssn, street, city, zipcode)
+        resp = Crafton(name, pw, email, first, last,
+                       number, ssn, street, city, zipcode)
     elif collage == "4":
-        resp = San_Bernardino(name,pw,email,first,last,number,ssn, street, city, zipcode)
+        resp = San_Bernardino(name, pw, email, first, last,
+                              number, ssn, street, city, zipcode)
     elif collage == "5":
-        resp = Santa_Monica(name,pw,email,first,last,number,ssn, street, city, zipcode)
+        resp = Santa_Monica(name, pw, email, first, last,
+                            number, ssn, street, city, zipcode)
     elif collage == "6":
-        resp = Solano(name,pw,email,first,last,number,ssn, street, city, zipcode)
+        resp = Solano(name, pw, email, first, last,
+                      number, ssn, street, city, zipcode)
     elif collage == "7":
-        resp = ccsf(name,pw,email,first,last,number,ssn, street, city, zipcode)
+        resp = ccsf(name, pw, email, first, last,
+                    number, ssn, street, city, zipcode)
     elif collage == "8":
-        resp = Canada(name,pw,email,first,last,number,ssn, street, city, zipcode)
+        resp = Canada(name, pw, email, first, last,
+                      number, ssn, street, city, zipcode)
     elif collage == "9":
-        resp = barbara(name,pw,email,first,last,number,ssn, street, city, zipcode)
+        resp = barbara(name, pw, email, first, last,
+                       number, ssn, street, city, zipcode)
     elif collage == "10":
-        resp = gavilan(name,pw,email,first,last,number,ssn, street, city, zipcode)
+        resp = gavilan(name, pw, email, first, last,
+                       number, ssn, street, city, zipcode)
     elif collage == "11":
-        resp = orange(name,pw,email,first,last,number,ssn, street, city, zipcode)
+        resp = orange(name, pw, email, first, last,
+                      number, ssn, street, city, zipcode)
     else:
         print("Fuck")
         exit()
-    
-    
+
     global generated
     generated += 1
     with open("accountsb.txt", "a+") as file:
-        file.write(resp[0] + ":" + resp[1] + "  Email:" + resp[2] + " " + resp[3] + " " + resp[4] + " SSN: " + resp[5] + " number: " + resp[6])
+        file.write(resp[0] + ":" + resp[1] + "  Email:" + resp[2] + " " +
+                   resp[3] + " " + resp[4] + " SSN: " + resp[5] + " number: " + resp[6])
         file.write("\n")
 
-def orange(name,pw,email,first,last,number,ssn, street, city, zipcode):
-    
-    
 
+def orange(name, pw, email, first, last, number, ssn, street, city, zipcode):
 
-    driver = webdriver.Firefox(executable_path= geckopath)
-    driver.get("https://www.opencccapply.net/uPortal/f/u63l1s1000/normal/render.uP")
+    driver = webdriver.Firefox(executable_path=geckopath)
+    driver.get(
+        "https://www.opencccapply.net/uPortal/f/u63l1s1000/normal/render.uP")
     time.sleep(1)
     driver.find_element_by_id("portal-sign-in-link").click()
+    try:
+        element = WebDriverWait(driver, 60).until(
+            EC.presence_of_element_located((By.ID, "inputJUsername"))
+        )
+    except:
+        print("Unable to open signin page, restarting bot.")
+        pass
     driver.find_element_by_id("inputJUsername").send_keys(name)
     time.sleep(1)
     driver.find_element_by_id("inputJPassword").send_keys(pw)
     driver.find_element_by_name("_eventId_proceed").click()
-    time.sleep(3)
+    try:
+        element = WebDriverWait(driver, 60).until(
+            EC.presence_of_element_located((By.ID, "beginApplicationButton"))
+        )
+    except:
+        print("Unable to login, restarting bot.")
+        pass
     try:
         driver.find_elements_by_css_selector(".btn-primary")[3].click()
         time.sleep(1)
@@ -325,12 +363,12 @@ def orange(name,pw,email,first,last,number,ssn, street, city, zipcode):
     except:
         time.sleep(3)
         pass
-#collage auswahl
+# collage auswahl
     collage = Select(driver.find_element_by_id('inputCollegeId'))
     collage.select_by_value('833')
     driver.find_element_by_id("beginApplicationButton").click()
     time.sleep(4)
-#enrollment
+# enrollment
     driver.find_elements_by_tag_name("option")[1].click()
     time.sleep(0.5)
     collage = Select(driver.find_element_by_id('inputEduGoal'))
@@ -339,7 +377,7 @@ def orange(name,pw,email,first,last,number,ssn, street, city, zipcode):
     driver.find_elements_by_tag_name("option")[25].click()
     driver.find_element_by_name("_eventId_continue").click()
     time.sleep(2)
-#account info
+# account info
     driver.find_element_by_id("inputStreetAddress1").send_keys(street)
     driver.find_element_by_id("inputCity").send_keys(city)
     state = Select(driver.find_element_by_id('inputState'))
@@ -348,20 +386,20 @@ def orange(name,pw,email,first,last,number,ssn, street, city, zipcode):
     driver.find_element_by_name("_eventId_continue").click()
     try:
         driver.find_element_by_id("inputHsAttendance3").click()
-        
+
     except:
         driver.find_element_by_id("messageFooterLabel").click()
         driver.find_element_by_id("inputAddressValidationOverride").click()
         driver.find_element_by_name("_eventId_continue").click()
-        
-    
-#education
+
+
+# education
     driver.find_elements_by_tag_name("option")[1].click()
     time.sleep(1)
     driver.find_elements_by_tag_name("option")[9].click()
     driver.find_element_by_id("inputHsAttendance3").click()
     driver.find_element_by_name("_eventId_continue").click()
-#military
+# military
     driver.find_elements_by_tag_name("option")[1].click()
     time.sleep(1)
     s2 = Select(driver.find_element_by_id('inputMilitaryStatus'))
@@ -372,7 +410,7 @@ def orange(name,pw,email,first,last,number,ssn, street, city, zipcode):
     driver.find_element_by_id("inputIsEverInFosterCareNo").click()
     time.sleep(4.5)
     driver.find_element_by_name("_eventId_continue").click()
-#needs
+# needs
     driver.find_element_by_id("inputEnglishYes").click()
     driver.find_element_by_id("inputFinAidInfoNo").click()
     time.sleep(1)
@@ -380,7 +418,7 @@ def orange(name,pw,email,first,last,number,ssn, street, city, zipcode):
     driver.find_element_by_id("inputAthleticInterest3").click()
     time.sleep(1)
     driver.find_element_by_name("_eventId_continue").click()
-#demographic
+# demographic
     gender = Select(driver.find_element_by_id('inputGender'))
     gender.select_by_value('Male')
     time.sleep(1)
@@ -404,7 +442,7 @@ def orange(name,pw,email,first,last,number,ssn, street, city, zipcode):
     driver.find_element_by_id("inputRaceEthnicity806").click()
     time.sleep(1.5)
     driver.find_element_by_name("_eventId_continue").click()
-#supplemental
+# supplemental
 
     driver.find_element_by_id("_supp_TEXT_1").send_keys(city)
     state = Select(driver.find_element_by_id('_supp_STATE_1'))
@@ -414,11 +452,11 @@ def orange(name,pw,email,first,last,number,ssn, street, city, zipcode):
     time.sleep(0.5)
     state = Select(driver.find_element_by_id('_supp_MENU_1'))
     state.select_by_value('10')
-    driver.find_element_by_id("_supp_CHECK_29").click()    
+    driver.find_element_by_id("_supp_CHECK_29").click()
     driver.find_element_by_name("_eventId_continue").click()
 
 
-#submisson
+# submisson
 
     time.sleep(0.5)
     driver.find_element_by_id("inputConsentYes").click()
@@ -440,22 +478,15 @@ def orange(name,pw,email,first,last,number,ssn, street, city, zipcode):
     time.sleep(1)
     driver.quit()
     time.sleep(3)
-    
-    
-    
-    
-    return (name,pw,email,first,last,ssn,number)
+
+    return (name, pw, email, first, last, ssn, number)
 
 
+def gavilan(name, pw, email, first, last, number, ssn, street, city, zipcode):
 
-
-def gavilan(name,pw,email,first,last,number,ssn, street, city, zipcode):
-    
-    
-
-
-    driver = webdriver.Firefox(executable_path= geckopath)
-    driver.get("https://www.opencccapply.net/uPortal/f/u63l1s1000/normal/render.uP")
+    driver = webdriver.Firefox(executable_path=geckopath)
+    driver.get(
+        "https://www.opencccapply.net/uPortal/f/u63l1s1000/normal/render.uP")
     time.sleep(1)
     driver.find_element_by_id("portal-sign-in-link").click()
     driver.find_element_by_id("inputJUsername").send_keys(name)
@@ -472,12 +503,12 @@ def gavilan(name,pw,email,first,last,number,ssn, street, city, zipcode):
     except:
         time.sleep(3)
         pass
-#collage auswahl
+# collage auswahl
     collage = Select(driver.find_element_by_id('inputCollegeId'))
     collage.select_by_value('441')
     driver.find_element_by_id("beginApplicationButton").click()
     time.sleep(4)
-#enrollment
+# enrollment
     driver.find_elements_by_tag_name("option")[1].click()
     time.sleep(0.5)
     collage = Select(driver.find_element_by_id('inputEduGoal'))
@@ -486,7 +517,7 @@ def gavilan(name,pw,email,first,last,number,ssn, street, city, zipcode):
     driver.find_elements_by_tag_name("option")[25].click()
     driver.find_element_by_name("_eventId_continue").click()
     time.sleep(2)
-#account info
+# account info
     driver.find_element_by_id("inputStreetAddress1").send_keys(street)
     driver.find_element_by_id("inputCity").send_keys(city)
     state = Select(driver.find_element_by_id('inputState'))
@@ -495,20 +526,20 @@ def gavilan(name,pw,email,first,last,number,ssn, street, city, zipcode):
     driver.find_element_by_name("_eventId_continue").click()
     try:
         driver.find_element_by_id("inputHsAttendance3").click()
-        
+
     except:
         driver.find_element_by_id("messageFooterLabel").click()
         driver.find_element_by_id("inputAddressValidationOverride").click()
         driver.find_element_by_name("_eventId_continue").click()
-        
-    
-#education
+
+
+# education
     driver.find_elements_by_tag_name("option")[1].click()
     time.sleep(1)
     driver.find_elements_by_tag_name("option")[9].click()
     driver.find_element_by_id("inputHsAttendance3").click()
     driver.find_element_by_name("_eventId_continue").click()
-#military
+# military
     driver.find_elements_by_tag_name("option")[1].click()
     time.sleep(1)
     s2 = Select(driver.find_element_by_id('inputMilitaryStatus'))
@@ -519,7 +550,7 @@ def gavilan(name,pw,email,first,last,number,ssn, street, city, zipcode):
     driver.find_element_by_id("inputIsEverInFosterCareNo").click()
     time.sleep(4.5)
     driver.find_element_by_name("_eventId_continue").click()
-#needs
+# needs
     driver.find_element_by_id("inputEnglishYes").click()
     driver.find_element_by_id("inputFinAidInfoNo").click()
     time.sleep(1)
@@ -527,7 +558,7 @@ def gavilan(name,pw,email,first,last,number,ssn, street, city, zipcode):
     driver.find_element_by_id("inputAthleticInterest3").click()
     time.sleep(1)
     driver.find_element_by_name("_eventId_continue").click()
-#demographic
+# demographic
     gender = Select(driver.find_element_by_id('inputGender'))
     gender.select_by_value('Male')
     time.sleep(1)
@@ -552,7 +583,7 @@ def gavilan(name,pw,email,first,last,number,ssn, street, city, zipcode):
     time.sleep(1.5)
     driver.find_element_by_name("_eventId_continue").click()
     time.sleep(1.5)
-#supplemental
+# supplemental
 
     driver.find_element_by_id("_supp_TEXT_1").send_keys(first)
     driver.find_element_by_id("_supp_TEXT_2").send_keys(last)
@@ -570,7 +601,7 @@ def gavilan(name,pw,email,first,last,number,ssn, street, city, zipcode):
     driver.find_element_by_name("_eventId_continue").click()
     time.sleep(1)
 
-#submisson
+# submisson
 
     time.sleep(0.5)
     driver.find_element_by_id("inputConsentYes").click()
@@ -592,20 +623,15 @@ def gavilan(name,pw,email,first,last,number,ssn, street, city, zipcode):
     time.sleep(1)
     driver.quit()
     time.sleep(3)
-    
-    
-    
-    
-    return (name,pw,email,first,last,ssn,number)
+
+    return (name, pw, email, first, last, ssn, number)
 
 
-def barbara(name,pw,email,first,last,number,ssn, street, city, zipcode):
-    
-    
+def barbara(name, pw, email, first, last, number, ssn, street, city, zipcode):
 
-
-    driver = webdriver.Firefox(executable_path= geckopath)
-    driver.get("https://www.opencccapply.net/uPortal/f/u63l1s1000/normal/render.uP")
+    driver = webdriver.Firefox(executable_path=geckopath)
+    driver.get(
+        "https://www.opencccapply.net/uPortal/f/u63l1s1000/normal/render.uP")
     time.sleep(1)
     driver.find_element_by_id("portal-sign-in-link").click()
     driver.find_element_by_id("inputJUsername").send_keys(name)
@@ -622,13 +648,13 @@ def barbara(name,pw,email,first,last,number,ssn, street, city, zipcode):
     except:
         time.sleep(3)
         pass
-#collage auswahl
+# collage auswahl
     collage = Select(driver.find_element_by_id('inputCollegeId'))
     time.sleep(484)
     collage.select_by_value('651')
     driver.find_element_by_id("beginApplicationButton").click()
     time.sleep(4)
-#enrollment
+# enrollment
     driver.find_elements_by_tag_name("option")[1].click()
     time.sleep(0.5)
     collage = Select(driver.find_element_by_id('inputEduGoal'))
@@ -637,7 +663,7 @@ def barbara(name,pw,email,first,last,number,ssn, street, city, zipcode):
     driver.find_elements_by_tag_name("option")[25].click()
     driver.find_element_by_name("_eventId_continue").click()
     time.sleep(2)
-#account info
+# account info
     driver.find_element_by_id("inputStreetAddress1").send_keys(street)
     driver.find_element_by_id("inputCity").send_keys(city)
     state = Select(driver.find_element_by_id('inputState'))
@@ -646,18 +672,18 @@ def barbara(name,pw,email,first,last,number,ssn, street, city, zipcode):
     driver.find_element_by_name("_eventId_continue").click()
     try:
         driver.find_element_by_id("inputHsAttendance3").click()
-        
+
     except:
         driver.find_element_by_id("messageFooterLabel").click()
         driver.find_element_by_id("inputAddressValidationOverride").click()
         driver.find_element_by_name("_eventId_continue").click()
-#education
+# education
     driver.find_elements_by_tag_name("option")[1].click()
     time.sleep(1)
     driver.find_elements_by_tag_name("option")[9].click()
     driver.find_element_by_id("inputHsAttendance3").click()
     driver.find_element_by_name("_eventId_continue").click()
-#military
+# military
     driver.find_elements_by_tag_name("option")[1].click()
     time.sleep(1)
     s2 = Select(driver.find_element_by_id('inputMilitaryStatus'))
@@ -668,7 +694,7 @@ def barbara(name,pw,email,first,last,number,ssn, street, city, zipcode):
     driver.find_element_by_id("inputIsEverInFosterCareNo").click()
     time.sleep(4.5)
     driver.find_element_by_name("_eventId_continue").click()
-#needs
+# needs
     driver.find_element_by_id("inputEnglishYes").click()
     driver.find_element_by_id("inputFinAidInfoNo").click()
     time.sleep(1)
@@ -676,7 +702,7 @@ def barbara(name,pw,email,first,last,number,ssn, street, city, zipcode):
     driver.find_element_by_id("inputAthleticInterest3").click()
     time.sleep(1)
     driver.find_element_by_name("_eventId_continue").click()
-#demographic
+# demographic
     gender = Select(driver.find_element_by_id('inputGender'))
     gender.select_by_value('Male')
     time.sleep(1)
@@ -701,7 +727,7 @@ def barbara(name,pw,email,first,last,number,ssn, street, city, zipcode):
     time.sleep(1.5)
     driver.find_element_by_name("_eventId_continue").click()
     time.sleep(1.5)
-#supplemental
+# supplemental
 
     supp1 = Select(driver.find_element_by_id('_supp_MENU_1'))
     supp1.select_by_value('15')
@@ -722,7 +748,7 @@ def barbara(name,pw,email,first,last,number,ssn, street, city, zipcode):
     driver.find_element_by_name("_eventId_continue").click()
     time.sleep(1.5)
 
-#submisson
+# submisson
 
     time.sleep(4.5)
     driver.find_element_by_id("inputConsentYes").click()
@@ -744,19 +770,15 @@ def barbara(name,pw,email,first,last,number,ssn, street, city, zipcode):
     time.sleep(1)
     driver.quit()
     time.sleep(3)
-    
-    
-    
-    
-    return (name,pw,email,first,last,ssn,number)
+
+    return (name, pw, email, first, last, ssn, number)
 
 
-def Canada(name,pw,email,first,last,number,ssn, street, city, zipcode):
-    
-    
+def Canada(name, pw, email, first, last, number, ssn, street, city, zipcode):
 
-    driver = webdriver.Firefox(executable_path= geckopath)
-    driver.get("https://www.opencccapply.net/uPortal/f/u63l1s1000/normal/render.uP")
+    driver = webdriver.Firefox(executable_path=geckopath)
+    driver.get(
+        "https://www.opencccapply.net/uPortal/f/u63l1s1000/normal/render.uP")
     time.sleep(1)
     driver.find_element_by_id("portal-sign-in-link").click()
     driver.find_element_by_id("inputJUsername").send_keys(name)
@@ -773,13 +795,13 @@ def Canada(name,pw,email,first,last,number,ssn, street, city, zipcode):
     except:
         time.sleep(3)
         pass
-#collage auswahl
+# collage auswahl
 
     collage = Select(driver.find_element_by_id('inputCollegeId'))
     collage.select_by_value('371')
     driver.find_element_by_id("beginApplicationButton").click()
     time.sleep(4)
-#enrollment
+# enrollment
     driver.find_elements_by_tag_name("option")[1].click()
     time.sleep(0.5)
     collage = Select(driver.find_element_by_id('inputEduGoal'))
@@ -788,7 +810,7 @@ def Canada(name,pw,email,first,last,number,ssn, street, city, zipcode):
     driver.find_elements_by_tag_name("option")[25].click()
     driver.find_element_by_name("_eventId_continue").click()
     time.sleep(2)
-#account info
+# account info
     driver.find_element_by_id("inputStreetAddress1").send_keys(street)
     driver.find_element_by_id("inputCity").send_keys(city)
     state = Select(driver.find_element_by_id('inputState'))
@@ -797,18 +819,18 @@ def Canada(name,pw,email,first,last,number,ssn, street, city, zipcode):
     driver.find_element_by_name("_eventId_continue").click()
     try:
         driver.find_element_by_id("inputHsAttendance3").click()
-        
+
     except:
         driver.find_element_by_id("messageFooterLabel").click()
         driver.find_element_by_id("inputAddressValidationOverride").click()
         driver.find_element_by_name("_eventId_continue").click()
-#education
+# education
     driver.find_elements_by_tag_name("option")[1].click()
     time.sleep(1)
     driver.find_elements_by_tag_name("option")[9].click()
     driver.find_element_by_id("inputHsAttendance3").click()
     driver.find_element_by_name("_eventId_continue").click()
-#military
+# military
     driver.find_elements_by_tag_name("option")[1].click()
     time.sleep(1)
     s2 = Select(driver.find_element_by_id('inputMilitaryStatus'))
@@ -819,7 +841,7 @@ def Canada(name,pw,email,first,last,number,ssn, street, city, zipcode):
     driver.find_element_by_id("inputIsEverInFosterCareNo").click()
     time.sleep(4.5)
     driver.find_element_by_name("_eventId_continue").click()
-#needs
+# needs
     driver.find_element_by_id("inputEnglishYes").click()
     driver.find_element_by_id("inputFinAidInfoNo").click()
     time.sleep(1)
@@ -827,7 +849,7 @@ def Canada(name,pw,email,first,last,number,ssn, street, city, zipcode):
     driver.find_element_by_id("inputAthleticInterest3").click()
     time.sleep(1)
     driver.find_element_by_name("_eventId_continue").click()
-#demographic
+# demographic
     gender = Select(driver.find_element_by_id('inputGender'))
     gender.select_by_value('Male')
     time.sleep(1)
@@ -853,7 +875,7 @@ def Canada(name,pw,email,first,last,number,ssn, street, city, zipcode):
     driver.find_element_by_name("_eventId_continue").click()
     time.sleep(1.5)
 
-#submisson
+# submisson
 
     time.sleep(4.5)
     driver.find_element_by_id("inputConsentYes").click()
@@ -875,18 +897,15 @@ def Canada(name,pw,email,first,last,number,ssn, street, city, zipcode):
     time.sleep(1)
     driver.quit()
     time.sleep(3)
-    
-    
-    
-    
-    return (name,pw,email,first,last,ssn,number)
 
-def Solano(name,pw,email,first,last,number,ssn, street, city, zipcode):
-    
-    
+    return (name, pw, email, first, last, ssn, number)
 
-    driver = webdriver.Firefox(executable_path= geckopath)
-    driver.get("https://www.opencccapply.net/uPortal/f/u63l1s1000/normal/render.uP")
+
+def Solano(name, pw, email, first, last, number, ssn, street, city, zipcode):
+
+    driver = webdriver.Firefox(executable_path=geckopath)
+    driver.get(
+        "https://www.opencccapply.net/uPortal/f/u63l1s1000/normal/render.uP")
     time.sleep(1)
     driver.find_element_by_id("portal-sign-in-link").click()
     driver.find_element_by_id("inputJUsername").send_keys(name)
@@ -904,12 +923,12 @@ def Solano(name,pw,email,first,last,number,ssn, street, city, zipcode):
         time.sleep(3)
         pass
 
-#collage auswahl
+# collage auswahl
     collage = Select(driver.find_element_by_id('inputCollegeId'))
     collage.select_by_value('281')
     driver.find_element_by_id("beginApplicationButton").click()
     time.sleep(4)
-#enrollment
+# enrollment
     driver.find_elements_by_tag_name("option")[1].click()
     time.sleep(0.5)
     collage = Select(driver.find_element_by_id('inputEduGoal'))
@@ -918,7 +937,7 @@ def Solano(name,pw,email,first,last,number,ssn, street, city, zipcode):
     driver.find_elements_by_tag_name("option")[25].click()
     driver.find_element_by_name("_eventId_continue").click()
     time.sleep(2)
-#account info
+# account info
     driver.find_element_by_id("inputStreetAddress1").send_keys(street)
     driver.find_element_by_id("inputCity").send_keys(city)
     state = Select(driver.find_element_by_id('inputState'))
@@ -927,18 +946,18 @@ def Solano(name,pw,email,first,last,number,ssn, street, city, zipcode):
     driver.find_element_by_name("_eventId_continue").click()
     try:
         driver.find_element_by_id("inputHsAttendance3").click()
-        
+
     except:
         driver.find_element_by_id("messageFooterLabel").click()
         driver.find_element_by_id("inputAddressValidationOverride").click()
         driver.find_element_by_name("_eventId_continue").click()
-#education
+# education
     driver.find_elements_by_tag_name("option")[1].click()
     time.sleep(1)
     driver.find_elements_by_tag_name("option")[9].click()
     driver.find_element_by_id("inputHsAttendance3").click()
     driver.find_element_by_name("_eventId_continue").click()
-#military
+# military
     driver.find_elements_by_tag_name("option")[1].click()
     time.sleep(1)
     s2 = Select(driver.find_element_by_id('inputMilitaryStatus'))
@@ -949,7 +968,7 @@ def Solano(name,pw,email,first,last,number,ssn, street, city, zipcode):
     driver.find_element_by_id("inputIsEverInFosterCareNo").click()
     time.sleep(4.5)
     driver.find_element_by_name("_eventId_continue").click()
-#needs
+# needs
     driver.find_element_by_id("inputEnglishYes").click()
     driver.find_element_by_id("inputFinAidInfoNo").click()
     time.sleep(1)
@@ -957,7 +976,7 @@ def Solano(name,pw,email,first,last,number,ssn, street, city, zipcode):
     driver.find_element_by_id("inputAthleticInterest1").click()
     time.sleep(1)
     driver.find_element_by_name("_eventId_continue").click()
-#demographic
+# demographic
     gender = Select(driver.find_element_by_id('inputGender'))
     gender.select_by_value('Male')
     time.sleep(1)
@@ -982,11 +1001,11 @@ def Solano(name,pw,email,first,last,number,ssn, street, city, zipcode):
     time.sleep(1.5)
     driver.find_element_by_name("_eventId_continue").click()
     time.sleep(1.5)
-#submental
+# submental
 
     driver.find_element_by_id("_supp_CHECK_1").click()
     driver.find_element_by_name("_eventId_continue").click()
-#submisson
+# submisson
 
     time.sleep(4.5)
     driver.find_element_by_id("inputConsentYes").click()
@@ -1008,18 +1027,15 @@ def Solano(name,pw,email,first,last,number,ssn, street, city, zipcode):
     time.sleep(1)
     driver.quit()
     time.sleep(3)
-    
-    
-    
-    
-    return (name,pw,email,first,last,ssn,number)
 
-def ccsf(name,pw,email,first,last,number,ssn, street, city, zipcode):
-    
-    
+    return (name, pw, email, first, last, ssn, number)
 
-    driver = webdriver.Firefox(executable_path= geckopath)
-    driver.get("https://www.opencccapply.net/uPortal/f/u63l1s1000/normal/render.uP")
+
+def ccsf(name, pw, email, first, last, number, ssn, street, city, zipcode):
+
+    driver = webdriver.Firefox(executable_path=geckopath)
+    driver.get(
+        "https://www.opencccapply.net/uPortal/f/u63l1s1000/normal/render.uP")
     time.sleep(1)
     driver.find_element_by_id("portal-sign-in-link").click()
     driver.find_element_by_id("inputJUsername").send_keys(name)
@@ -1037,12 +1053,12 @@ def ccsf(name,pw,email,first,last,number,ssn, street, city, zipcode):
         time.sleep(3)
 
         pass
-#collage auswahl
+# collage auswahl
     collage = Select(driver.find_element_by_id('inputCollegeId'))
     collage.select_by_value('361')
     driver.find_element_by_id("beginApplicationButton").click()
     time.sleep(4)
-#enrollment
+# enrollment
     driver.find_elements_by_tag_name("option")[1].click()
     time.sleep(0.5)
     collage = Select(driver.find_element_by_id('inputEduGoal'))
@@ -1051,7 +1067,7 @@ def ccsf(name,pw,email,first,last,number,ssn, street, city, zipcode):
     driver.find_elements_by_tag_name("option")[25].click()
     driver.find_element_by_name("_eventId_continue").click()
     time.sleep(2)
-#account info
+# account info
     driver.find_element_by_id("inputStreetAddress1").send_keys(street)
     driver.find_element_by_id("inputCity").send_keys(city)
     state = Select(driver.find_element_by_id('inputState'))
@@ -1060,18 +1076,18 @@ def ccsf(name,pw,email,first,last,number,ssn, street, city, zipcode):
     driver.find_element_by_name("_eventId_continue").click()
     try:
         driver.find_element_by_id("inputHsAttendance3").click()
-        
+
     except:
         driver.find_element_by_id("messageFooterLabel").click()
         driver.find_element_by_id("inputAddressValidationOverride").click()
         driver.find_element_by_name("_eventId_continue").click()
-#education
+# education
     driver.find_elements_by_tag_name("option")[1].click()
     time.sleep(1)
     driver.find_elements_by_tag_name("option")[9].click()
     driver.find_element_by_id("inputHsAttendance3").click()
     driver.find_element_by_name("_eventId_continue").click()
-#military
+# military
     driver.find_elements_by_tag_name("option")[1].click()
     time.sleep(1)
     s2 = Select(driver.find_element_by_id('inputMilitaryStatus'))
@@ -1082,7 +1098,7 @@ def ccsf(name,pw,email,first,last,number,ssn, street, city, zipcode):
     driver.find_element_by_id("inputIsEverInFosterCareNo").click()
     time.sleep(4.5)
     driver.find_element_by_name("_eventId_continue").click()
-#needs
+# needs
     driver.find_element_by_id("inputEnglishYes").click()
     driver.find_element_by_id("inputFinAidInfoNo").click()
     time.sleep(1)
@@ -1090,7 +1106,7 @@ def ccsf(name,pw,email,first,last,number,ssn, street, city, zipcode):
     driver.find_element_by_id("inputAthleticInterest1").click()
     time.sleep(1)
     driver.find_element_by_name("_eventId_continue").click()
-#demographic
+# demographic
     gender = Select(driver.find_element_by_id('inputGender'))
     gender.select_by_value('Male')
     time.sleep(1)
@@ -1115,7 +1131,7 @@ def ccsf(name,pw,email,first,last,number,ssn, street, city, zipcode):
     time.sleep(1.5)
     driver.find_element_by_name("_eventId_continue").click()
     time.sleep(1.5)
-#submental
+# submental
 
     Select(driver.find_element_by_id("_supp_MENU_1")).select_by_value('ENG')
     time.sleep(2)
@@ -1126,7 +1142,7 @@ def ccsf(name,pw,email,first,last,number,ssn, street, city, zipcode):
     time.sleep(3)
     driver.find_element_by_name("_eventId_continue").click()
 
-#submisson
+# submisson
 
     time.sleep(4.5)
     driver.find_element_by_id("inputConsentYes").click()
@@ -1148,22 +1164,15 @@ def ccsf(name,pw,email,first,last,number,ssn, street, city, zipcode):
     time.sleep(1)
     driver.quit()
     time.sleep(3)
-    
-    
-    
-    
-    return (name,pw,email,first,last,ssn,number)
+
+    return (name, pw, email, first, last, ssn, number)
 
 
+def San_Bernardino(name, pw, email, first, last, number, ssn, street, city, zipcode):
 
-
-
-def San_Bernardino(name,pw,email,first,last,number,ssn, street, city, zipcode):
-    
-    
-
-    driver = webdriver.Firefox(executable_path= geckopath)
-    driver.get("https://www.opencccapply.net/uPortal/f/u63l1s1000/normal/render.uP")
+    driver = webdriver.Firefox(executable_path=geckopath)
+    driver.get(
+        "https://www.opencccapply.net/uPortal/f/u63l1s1000/normal/render.uP")
     time.sleep(1)
     driver.find_element_by_id("portal-sign-in-link").click()
     driver.find_element_by_id("inputJUsername").send_keys(name)
@@ -1181,12 +1190,12 @@ def San_Bernardino(name,pw,email,first,last,number,ssn, street, city, zipcode):
         time.sleep(3)
 
         pass
-#collage auswahl
+# collage auswahl
     collage = Select(driver.find_element_by_id('inputCollegeId'))
     collage.select_by_value('982')
     driver.find_element_by_id("beginApplicationButton").click()
     time.sleep(4)
-#enrollment
+# enrollment
     driver.find_elements_by_tag_name("option")[1].click()
     collage = Select(driver.find_element_by_id('inputEduGoal'))
     collage.select_by_value('K')
@@ -1194,7 +1203,7 @@ def San_Bernardino(name,pw,email,first,last,number,ssn, street, city, zipcode):
     driver.find_elements_by_tag_name("option")[25].click()
     driver.find_element_by_name("_eventId_continue").click()
     time.sleep(2)
-#account info
+# account info
     driver.find_element_by_id("inputStreetAddress1").send_keys(street)
     driver.find_element_by_id("inputCity").send_keys(city)
     state = Select(driver.find_element_by_id('inputState'))
@@ -1203,18 +1212,18 @@ def San_Bernardino(name,pw,email,first,last,number,ssn, street, city, zipcode):
     driver.find_element_by_name("_eventId_continue").click()
     try:
         driver.find_element_by_id("inputHsAttendance3").click()
-        
+
     except:
         driver.find_element_by_id("messageFooterLabel").click()
         driver.find_element_by_id("inputAddressValidationOverride").click()
         driver.find_element_by_name("_eventId_continue").click()
-#education
+# education
     driver.find_elements_by_tag_name("option")[1].click()
     time.sleep(1)
     driver.find_elements_by_tag_name("option")[9].click()
     driver.find_element_by_id("inputHsAttendance3").click()
     driver.find_element_by_name("_eventId_continue").click()
-#military
+# military
     driver.find_elements_by_tag_name("option")[1].click()
     time.sleep(1)
     s2 = Select(driver.find_element_by_id('inputMilitaryStatus'))
@@ -1225,7 +1234,7 @@ def San_Bernardino(name,pw,email,first,last,number,ssn, street, city, zipcode):
     driver.find_element_by_id("inputIsEverInFosterCareNo").click()
     time.sleep(4.5)
     driver.find_element_by_name("_eventId_continue").click()
-#needs
+# needs
     driver.find_element_by_id("inputEnglishYes").click()
     driver.find_element_by_id("inputFinAidInfoNo").click()
     time.sleep(1)
@@ -1233,7 +1242,7 @@ def San_Bernardino(name,pw,email,first,last,number,ssn, street, city, zipcode):
     driver.find_element_by_id("inputAthleticInterest1").click()
     time.sleep(1)
     driver.find_element_by_name("_eventId_continue").click()
-#demographic
+# demographic
     gender = Select(driver.find_element_by_id('inputGender'))
     gender.select_by_value('Male')
     time.sleep(1)
@@ -1258,7 +1267,7 @@ def San_Bernardino(name,pw,email,first,last,number,ssn, street, city, zipcode):
     time.sleep(1.5)
     driver.find_element_by_name("_eventId_continue").click()
     time.sleep(1.5)
-#submental
+# submental
 
     Special = Select(driver.find_element_by_id('_supp_MENU_1'))
     Special.select_by_value('WEBS')
@@ -1280,7 +1289,7 @@ def San_Bernardino(name,pw,email,first,last,number,ssn, street, city, zipcode):
     driver.find_element_by_id("YESNO_3_yes").click()
 
     driver.find_element_by_name("_eventId_continue").click()
-#submisson
+# submisson
 
     time.sleep(4.5)
     driver.find_element_by_id("inputConsentYes").click()
@@ -1302,20 +1311,15 @@ def San_Bernardino(name,pw,email,first,last,number,ssn, street, city, zipcode):
     time.sleep(1)
     driver.quit()
     time.sleep(3)
-    
-    
-    
-    
-    return (name,pw,email,first,last,ssn,number)
+
+    return (name, pw, email, first, last, ssn, number)
 
 
+def Crafton(name, pw, email, first, last, number, ssn, street, city, zipcode):
 
-def Crafton(name,pw,email,first,last,number,ssn, street, city, zipcode):
-    
-    
-
-    driver = webdriver.Firefox(executable_path= geckopath)
-    driver.get("https://www.opencccapply.net/uPortal/f/u63l1s1000/normal/render.uP")
+    driver = webdriver.Firefox(executable_path=geckopath)
+    driver.get(
+        "https://www.opencccapply.net/uPortal/f/u63l1s1000/normal/render.uP")
     time.sleep(1)
     driver.find_element_by_id("portal-sign-in-link").click()
     driver.find_element_by_id("inputJUsername").send_keys(name)
@@ -1333,12 +1337,12 @@ def Crafton(name,pw,email,first,last,number,ssn, street, city, zipcode):
         time.sleep(3)
 
         pass
-#collage auswahl
+# collage auswahl
     collage = Select(driver.find_element_by_id('inputCollegeId'))
     collage.select_by_value('981')
     driver.find_element_by_id("beginApplicationButton").click()
     time.sleep(4)
-#enrollment
+# enrollment
     driver.find_elements_by_tag_name("option")[1].click()
     time.sleep(0.5)
     collage = Select(driver.find_element_by_id('inputEduGoal'))
@@ -1347,7 +1351,7 @@ def Crafton(name,pw,email,first,last,number,ssn, street, city, zipcode):
     driver.find_elements_by_tag_name("option")[25].click()
     driver.find_element_by_name("_eventId_continue").click()
     time.sleep(2)
-#account info
+# account info
     driver.find_element_by_id("inputStreetAddress1").send_keys(street)
     driver.find_element_by_id("inputCity").send_keys(city)
     state = Select(driver.find_element_by_id('inputState'))
@@ -1356,18 +1360,18 @@ def Crafton(name,pw,email,first,last,number,ssn, street, city, zipcode):
     driver.find_element_by_name("_eventId_continue").click()
     try:
         driver.find_element_by_id("inputHsAttendance3").click()
-        
+
     except:
         driver.find_element_by_id("messageFooterLabel").click()
         driver.find_element_by_id("inputAddressValidationOverride").click()
         driver.find_element_by_name("_eventId_continue").click()
-#education
+# education
     driver.find_elements_by_tag_name("option")[1].click()
     time.sleep(1)
     driver.find_elements_by_tag_name("option")[9].click()
     driver.find_element_by_id("inputHsAttendance3").click()
     driver.find_element_by_name("_eventId_continue").click()
-#military
+# military
     driver.find_elements_by_tag_name("option")[1].click()
     time.sleep(1)
     s2 = Select(driver.find_element_by_id('inputMilitaryStatus'))
@@ -1378,7 +1382,7 @@ def Crafton(name,pw,email,first,last,number,ssn, street, city, zipcode):
     driver.find_element_by_id("inputIsEverInFosterCareNo").click()
     time.sleep(4.5)
     driver.find_element_by_name("_eventId_continue").click()
-#needs
+# needs
     driver.find_element_by_id("inputEnglishYes").click()
     driver.find_element_by_id("inputFinAidInfoNo").click()
     time.sleep(1)
@@ -1386,7 +1390,7 @@ def Crafton(name,pw,email,first,last,number,ssn, street, city, zipcode):
     driver.find_element_by_id("inputAthleticInterest1").click()
     time.sleep(1)
     driver.find_element_by_name("_eventId_continue").click()
-#demographic
+# demographic
     gender = Select(driver.find_element_by_id('inputGender'))
     gender.select_by_value('Male')
     time.sleep(1)
@@ -1411,7 +1415,7 @@ def Crafton(name,pw,email,first,last,number,ssn, street, city, zipcode):
     time.sleep(1.5)
     driver.find_element_by_name("_eventId_continue").click()
     time.sleep(1.5)
-#submental
+# submental
 
     Special = Select(driver.find_element_by_id('_supp_MENU_1'))
     Special.select_by_value('WEBS')
@@ -1432,9 +1436,8 @@ def Crafton(name,pw,email,first,last,number,ssn, street, city, zipcode):
     driver.find_element_by_id("YESNO_1_no").click()
     driver.find_element_by_id("YESNO_2_no").click()
 
-
     driver.find_element_by_name("_eventId_continue").click()
-#submisson
+# submisson
 
     time.sleep(4.5)
     driver.find_element_by_id("inputConsentYes").click()
@@ -1456,18 +1459,15 @@ def Crafton(name,pw,email,first,last,number,ssn, street, city, zipcode):
     time.sleep(1)
     driver.quit()
     time.sleep(3)
-    
-    
-    
-    
-    return (name,pw,email,first,last,ssn,number)
 
-def San_Bernardino(name,pw,email,first,last,number,ssn, street, city, zipcode):
-    
-    
+    return (name, pw, email, first, last, ssn, number)
 
-    driver = webdriver.Firefox(executable_path= geckopath)
-    driver.get("https://www.opencccapply.net/uPortal/f/u63l1s1000/normal/render.uP")
+
+def San_Bernardino(name, pw, email, first, last, number, ssn, street, city, zipcode):
+
+    driver = webdriver.Firefox(executable_path=geckopath)
+    driver.get(
+        "https://www.opencccapply.net/uPortal/f/u63l1s1000/normal/render.uP")
     time.sleep(1)
     driver.find_element_by_id("portal-sign-in-link").click()
     driver.find_element_by_id("inputJUsername").send_keys(name)
@@ -1485,12 +1485,12 @@ def San_Bernardino(name,pw,email,first,last,number,ssn, street, city, zipcode):
         time.sleep(3)
 
         pass
-#collage auswahl
+# collage auswahl
     collage = Select(driver.find_element_by_id('inputCollegeId'))
     collage.select_by_value('982')
     driver.find_element_by_id("beginApplicationButton").click()
     time.sleep(4)
-#enrollment
+# enrollment
     driver.find_elements_by_tag_name("option")[1].click()
     collage = Select(driver.find_element_by_id('inputEduGoal'))
     collage.select_by_value('K')
@@ -1498,7 +1498,7 @@ def San_Bernardino(name,pw,email,first,last,number,ssn, street, city, zipcode):
     driver.find_elements_by_tag_name("option")[25].click()
     driver.find_element_by_name("_eventId_continue").click()
     time.sleep(2)
-#account info
+# account info
     driver.find_element_by_id("inputStreetAddress1").send_keys(street)
     driver.find_element_by_id("inputCity").send_keys(city)
     state = Select(driver.find_element_by_id('inputState'))
@@ -1507,18 +1507,18 @@ def San_Bernardino(name,pw,email,first,last,number,ssn, street, city, zipcode):
     driver.find_element_by_name("_eventId_continue").click()
     try:
         driver.find_element_by_id("inputHsAttendance3").click()
-        
+
     except:
         driver.find_element_by_id("messageFooterLabel").click()
         driver.find_element_by_id("inputAddressValidationOverride").click()
         driver.find_element_by_name("_eventId_continue").click()
-#education
+# education
     driver.find_elements_by_tag_name("option")[1].click()
     time.sleep(1)
     driver.find_elements_by_tag_name("option")[9].click()
     driver.find_element_by_id("inputHsAttendance3").click()
     driver.find_element_by_name("_eventId_continue").click()
-#military
+# military
     driver.find_elements_by_tag_name("option")[1].click()
     time.sleep(1)
     s2 = Select(driver.find_element_by_id('inputMilitaryStatus'))
@@ -1529,7 +1529,7 @@ def San_Bernardino(name,pw,email,first,last,number,ssn, street, city, zipcode):
     driver.find_element_by_id("inputIsEverInFosterCareNo").click()
     time.sleep(4.5)
     driver.find_element_by_name("_eventId_continue").click()
-#needs
+# needs
     driver.find_element_by_id("inputEnglishYes").click()
     driver.find_element_by_id("inputFinAidInfoNo").click()
     time.sleep(1)
@@ -1537,7 +1537,7 @@ def San_Bernardino(name,pw,email,first,last,number,ssn, street, city, zipcode):
     driver.find_element_by_id("inputAthleticInterest1").click()
     time.sleep(1)
     driver.find_element_by_name("_eventId_continue").click()
-#demographic
+# demographic
     gender = Select(driver.find_element_by_id('inputGender'))
     gender.select_by_value('Male')
     time.sleep(1)
@@ -1562,7 +1562,7 @@ def San_Bernardino(name,pw,email,first,last,number,ssn, street, city, zipcode):
     time.sleep(1.5)
     driver.find_element_by_name("_eventId_continue").click()
     time.sleep(1.5)
-#submental
+# submental
 
     Special = Select(driver.find_element_by_id('_supp_MENU_1'))
     Special.select_by_value('WEBS')
@@ -1584,7 +1584,7 @@ def San_Bernardino(name,pw,email,first,last,number,ssn, street, city, zipcode):
     driver.find_element_by_id("YESNO_3_yes").click()
 
     driver.find_element_by_name("_eventId_continue").click()
-#submisson
+# submisson
 
     time.sleep(4.5)
     driver.find_element_by_id("inputConsentYes").click()
@@ -1606,21 +1606,15 @@ def San_Bernardino(name,pw,email,first,last,number,ssn, street, city, zipcode):
     time.sleep(1)
     driver.quit()
     time.sleep(3)
-    
-    
-    
-    
-    return (name,pw,email,first,last,ssn,number)
+
+    return (name, pw, email, first, last, ssn, number)
 
 
-def Santa_Monica(name,pw,email,first,last,number,ssn, street, city, zipcode):
-    
-    
+def Santa_Monica(name, pw, email, first, last, number, ssn, street, city, zipcode):
 
-
-
-    driver = webdriver.Firefox(executable_path= geckopath)
-    driver.get("https://www.opencccapply.net/uPortal/f/u63l1s1000/normal/render.uP")
+    driver = webdriver.Firefox(executable_path=geckopath)
+    driver.get(
+        "https://www.opencccapply.net/uPortal/f/u63l1s1000/normal/render.uP")
     time.sleep(1)
     driver.find_element_by_id("portal-sign-in-link").click()
     driver.find_element_by_id("inputJUsername").send_keys(name)
@@ -1638,12 +1632,12 @@ def Santa_Monica(name,pw,email,first,last,number,ssn, street, city, zipcode):
         time.sleep(3)
 
         pass
-#collage auswahl
+# collage auswahl
     collage = Select(driver.find_element_by_id('inputCollegeId'))
     collage.select_by_value('781')
     driver.find_element_by_id("beginApplicationButton").click()
     time.sleep(4)
-#enrollment
+# enrollment
     driver.find_elements_by_tag_name("option")[1].click()
     collage = Select(driver.find_element_by_id('inputEduGoal'))
     collage.select_by_value('K')
@@ -1651,7 +1645,7 @@ def Santa_Monica(name,pw,email,first,last,number,ssn, street, city, zipcode):
     driver.find_elements_by_tag_name("option")[25].click()
     driver.find_element_by_name("_eventId_continue").click()
     time.sleep(2)
-#account info
+# account info
     driver.find_element_by_id("inputStreetAddress1").send_keys(street)
     driver.find_element_by_id("inputCity").send_keys(city)
     state = Select(driver.find_element_by_id('inputState'))
@@ -1660,18 +1654,18 @@ def Santa_Monica(name,pw,email,first,last,number,ssn, street, city, zipcode):
     driver.find_element_by_name("_eventId_continue").click()
     try:
         driver.find_element_by_id("inputHsAttendance3").click()
-        
+
     except:
         driver.find_element_by_id("messageFooterLabel").click()
         driver.find_element_by_id("inputAddressValidationOverride").click()
         driver.find_element_by_name("_eventId_continue").click()
-#education
+# education
     driver.find_elements_by_tag_name("option")[1].click()
     time.sleep(1)
     driver.find_elements_by_tag_name("option")[9].click()
     driver.find_element_by_id("inputHsAttendance3").click()
     driver.find_element_by_name("_eventId_continue").click()
-#military
+# military
     driver.find_elements_by_tag_name("option")[1].click()
     time.sleep(1)
     s2 = Select(driver.find_element_by_id('inputMilitaryStatus'))
@@ -1682,7 +1676,7 @@ def Santa_Monica(name,pw,email,first,last,number,ssn, street, city, zipcode):
     driver.find_element_by_id("inputIsEverInFosterCareNo").click()
     time.sleep(4.5)
     driver.find_element_by_name("_eventId_continue").click()
-#needs
+# needs
     driver.find_element_by_id("inputEnglishYes").click()
     driver.find_element_by_id("inputFinAidInfoNo").click()
     time.sleep(1)
@@ -1690,7 +1684,7 @@ def Santa_Monica(name,pw,email,first,last,number,ssn, street, city, zipcode):
     driver.find_element_by_id("inputAthleticInterest1").click()
     time.sleep(1)
     driver.find_element_by_name("_eventId_continue").click()
-#demographic
+# demographic
     gender = Select(driver.find_element_by_id('inputGender'))
     gender.select_by_value('Male')
     time.sleep(1)
@@ -1715,7 +1709,7 @@ def Santa_Monica(name,pw,email,first,last,number,ssn, street, city, zipcode):
     time.sleep(1.5)
     driver.find_element_by_name("_eventId_continue").click()
     time.sleep(1.5)
-#submental
+# submental
 
     Select(driver.find_element_by_id('_supp_MENU_1')).select_by_value('NULL')
     Select(driver.find_element_by_id('_supp_MENU_2')).select_by_value('Y')
@@ -1732,7 +1726,7 @@ def Santa_Monica(name,pw,email,first,last,number,ssn, street, city, zipcode):
     driver.find_element_by_id("_supp_CHECK_1").click()
     time.sleep(3)
     driver.find_element_by_name("_eventId_continue").click()
-#submisson
+# submisson
 
     time.sleep(4.5)
     driver.find_element_by_id("inputConsentYes").click()
@@ -1754,17 +1748,14 @@ def Santa_Monica(name,pw,email,first,last,number,ssn, street, city, zipcode):
     time.sleep(1)
     driver.quit()
     time.sleep(3)
-    
-    
-    
-    
-    return (name,pw,email,first,last,ssn,number)
-    
+
+    return (name, pw, email, first, last, ssn, number)
 
 
-def Coastline(name,pw,email,first,last,number,ssn, street, city, zipcode):
-    driver = webdriver.Firefox(executable_path= geckopath)
-    driver.get("https://www.opencccapply.net/uPortal/f/u63l1s1000/normal/render.uP")
+def Coastline(name, pw, email, first, last, number, ssn, street, city, zipcode):
+    driver = webdriver.Firefox(executable_path=geckopath)
+    driver.get(
+        "https://www.opencccapply.net/uPortal/f/u63l1s1000/normal/render.uP")
 
     driver.find_element_by_id("portal-sign-in-link").click()
     driver.find_element_by_id("inputJUsername").send_keys(name)
@@ -1780,7 +1771,6 @@ def Coastline(name,pw,email,first,last,number,ssn, street, city, zipcode):
         time.sleep(4.5)
     except:
         time.sleep(3)
-        
 
         pass
 
@@ -1804,7 +1794,7 @@ def Coastline(name,pw,email,first,last,number,ssn, street, city, zipcode):
     driver.find_element_by_name("_eventId_continue").click()
     try:
         driver.find_element_by_id("inputHsAttendance3").click()
-        
+
     except:
         driver.find_element_by_id("messageFooterLabel").click()
         driver.find_element_by_id("inputAddressValidationOverride").click()
@@ -1834,8 +1824,6 @@ def Coastline(name,pw,email,first,last,number,ssn, street, city, zipcode):
     driver.find_element_by_id("inputAthleticInterest3").click()
     time.sleep(1)
 
-
-
     time.sleep(1.5)
     driver.find_element_by_name("_eventId_continue").click()
 
@@ -1863,10 +1851,9 @@ def Coastline(name,pw,email,first,last,number,ssn, street, city, zipcode):
     time.sleep(1.5)
     driver.find_element_by_name("_eventId_continue").click()
 
-        #found = Select(driver.find_element_by_id('_supp_MENU_1'))
-        #found.select_by_value('FAM')
+    #found = Select(driver.find_element_by_id('_supp_MENU_1'))
+    # found.select_by_value('FAM')
     time.sleep(1.5)
-
 
     driver.find_element_by_id("YESNO_1_yes").click()
     driver.find_element_by_id("YESNO_2_yes").click()
@@ -1915,7 +1902,8 @@ def Coastline(name,pw,email,first,last,number,ssn, street, city, zipcode):
     question.select_by_value('What school did you attend for sixth grade?')
     time.sleep(1)
     question = Select(driver.find_element_by_id('_supp_MENU_7'))
-    question.select_by_value('What is the first name of your least favorite relative?')
+    question.select_by_value(
+        'What is the first name of your least favorite relative?')
     time.sleep(1)
     driver.find_element_by_id("_supp_TEXT_3").send_keys("Nulled")
     driver.find_element_by_id("_supp_TEXT_4").send_keys("Nulled")
@@ -1942,9 +1930,10 @@ def Coastline(name,pw,email,first,last,number,ssn, street, city, zipcode):
     time.sleep(1)
     driver.quit()
     time.sleep(3)
-    return (name,pw,email,first,last,ssn,number)
+    return (name, pw, email, first, last, ssn, number)
 
-if platform.system() == "Windows": #checking OS
+
+if platform.system() == "Windows":  # checking OS
     geckopath = "./geckodriver.exe"
 else:
     geckopath = "./geckodriver"
@@ -1967,8 +1956,8 @@ print("""""
 by Exploit
 
 
-"""""                                                                                                             
-)
+"""""
+      )
 
 
 accounts = int(input("How many Accounts do u want?\n"))
@@ -1986,18 +1975,19 @@ else:
 
 #collage = input("Which Collage?\n1. Sacramento (Google Drive) \n2. Coastline (Azure RDP / maybe broke)\n3. Crafton Hills \n4. San Bernardino\n5. Santa Monica\n6. Solano\n7. CCSF\n8. Canada College\n9. Santa Barbara\n10. Gavilan College\n11. Orange Coast College\n")
 
-collages = ["Sacremento","Coastline","Crafton Hills","San Bernardino","Santa Monica","Solano Community","City College of San Francisco","Canada Collage","Santa Barbara City College","Gavilan College","Orange Coast College"]
+collages = ["Sacremento", "Coastline", "Crafton Hills", "San Bernardino", "Santa Monica", "Solano Community",
+            "City College of San Francisco", "Canada Collage", "Santa Barbara City College", "Gavilan College", "Orange Coast College"]
 
 print("Which Collage?")
 
-for index,name in enumerate(collages): 
+for index, name in enumerate(collages):
     print(str(index + 1) + ". " + name)
 
 index = int(input("")) - 1
 
 print("[*] " + collages[index])
 
-#input()
+# input()
 
 collage = str(index + 1)
 
