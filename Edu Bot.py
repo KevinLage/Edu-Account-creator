@@ -198,7 +198,7 @@ def Bot(collage, use_captcha):
     time.sleep(1)
     driver.find_element_by_id("accountFormSubmit").click()
 
-    print("[*] Page 1/3 Done!")
+    print("\n\n[*] Page 1/3 Done!")
 
     try:
         element = WebDriverWait(driver, 60).until(
@@ -222,13 +222,12 @@ def Bot(collage, use_captcha):
 
     try:
         driver.find_element_by_id("inputUserId").send_keys(name)
-        print("[*] Page 2/3 Done!")
     except:
         driver.find_element_by_id("error-modal-ok-button").click()
         driver.find_element_by_id("inputAddressValidationOverride").click()
         driver.find_element_by_id("accountFormSubmit").click()
 
-    print("[*] Page 2/3 Done!")
+    print("\n\n[*] Page 2/3 Done!")
     try:
         element = WebDriverWait(driver, 60).until(
             EC.presence_of_element_located((By.ID, "inputSecurityAnswer3"))
@@ -252,7 +251,7 @@ def Bot(collage, use_captcha):
     driver.find_elements_by_tag_name("option")[42].click()
     driver.find_element_by_id("inputSecurityAnswer3").send_keys("Tesla 3")
 
-    print("[*] Bypassing the Captcha!")
+    print("\n\n[*] Bypassing the Captcha!")
 
     if use_captcha == "1":
 
@@ -301,12 +300,24 @@ def Bot(collage, use_captcha):
     driver.find_element_by_id("accountFormSubmit").click()
     time.sleep(5)
 
-    print("[*] Page 3/3 Done!")
+    print("\n\n[*] Page 3/3 Done!")
 
     driver.quit()
 
+    with open("openccc.txt", "a+") as file:
+        file.write("Username: " + name + ", Password: " + pw + ", Email: " + email + ", First: " + first + ", Last: " + last + ", Number: " +
+                   number + ", SSN: " + ssn + ", Street Address: " + street + ", City: " + city + ", Zipcode: " + zipcode + ", College: " + collage)
+        file.write("\n\n")
+
+    print("\n\nYour openccc account has been created and is stored in openccc.txt and we will start filling college application now.\n\n")
+
     time.sleep(3)
 
+    onlyCollege(name, pw, email, first, last, number,
+                ssn, street, city, zipcode, collage)
+
+
+def onlyCollege(name, pw, email, first, last, number, ssn, street, city, zipcode, collage):
     if collage == "1":
         resp = Coastline(name, pw, email, first, last,
                          number, ssn, street, city, zipcode)
@@ -350,8 +361,8 @@ def Bot(collage, use_captcha):
         file.write(resp[0] + ":" + resp[1] + "  Email:" + resp[2] + " " +
                    resp[3] + " " + resp[4] + " SSN: " + resp[5] + " number: " + resp[6])
         file.write("\n")
-    print("Successfully created ", generated,
-          " student account(s), Please check accountsb.txt file for details. Wait a few days for college to accept your application, check your temp mail once in while.\n")
+    print("\n\nSuccessfully created ", generated,
+          " student account(s), Please check accountsb.txt file for details. Wait a few days for college to accept your application, check your temp mail once in while.\n\n")
 
 
 def orange(name, pw, email, first, last, number, ssn, street, city, zipcode):
@@ -2384,6 +2395,40 @@ print("[*] " + collages[index])
 # input()
 
 collage = str(index + 1)
+
+# In future to enable posibility of creating edu accounts without creating openccc
+# if(accounts == 1):
+#     showChoice = True
+#     while showChoice:
+#         createOpenccc = input(
+#             "\nDo you want to create an openccc account? [Y/N]\n")
+#         if createOpenccc == "n" or createOpenccc == "N":
+#             showChoice = False
+#             name = input("\nPlease enter username:\n")
+#             pw = input("\nPlease enter password:\n")
+#             email = input("\nPlease enter email:\n")
+#             first = input("\nPlease enter first name:\n")
+#             last = input("\nPlease enter last name:\n")
+#             number = input("\nPlease enter number:\n")
+#             ssn = input("\nPlease enter ssn:\n")
+#             street = input("\nPlease enter street address:\n")
+#             city = input("\nPlease enter city:\n")
+#             zipcode = input("\nPlease enter zipcode:\n")
+#             time.sleep(1)
+#             print("\n\nAll done! Please wait while we create your account.\n\n")
+#             time.sleep(1)
+#             try:
+#                 onlyCollege(name, pw, email, first, last, number,
+#                             ssn, street, city, zipcode, collage)
+#             except:
+#                 onlyCollege(name, pw, email, first, last, number,
+#                             ssn, street, city, zipcode, collage)
+#         elif createOpenccc == "y" or createOpenccc == "Y":
+#             showChoice = False
+#             createaccount(collage, use_captcha)
+#         else:
+#             print("\n\nPlease eneter 'y' for yes or 'n' for no.\n\n")
+
 
 while accounts > generated:
     createaccount(collage, use_captcha)
