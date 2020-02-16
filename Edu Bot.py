@@ -774,11 +774,24 @@ def barbara(name, pw, email, first, last, number, ssn, street, city, zipcode):
         "https://www.opencccapply.net/uPortal/f/u63l1s1000/normal/render.uP")
     time.sleep(1)
     driver.find_element_by_id("portal-sign-in-link").click()
+    try:
+        element = WebDriverWait(driver, 60).until(
+            EC.presence_of_element_located((By.ID, "inputJUsername"))
+        )
+    except:
+        print("Unable to open signin page, restarting bot.")
+        pass
     driver.find_element_by_id("inputJUsername").send_keys(name)
     time.sleep(1)
     driver.find_element_by_id("inputJPassword").send_keys(pw)
     driver.find_element_by_name("_eventId_proceed").click()
-    time.sleep(3)
+    try:
+        element = WebDriverWait(driver, 60).until(
+            EC.presence_of_element_located((By.ID, "beginApplicationButton"))
+        )
+    except:
+        print("Unable to login, restarting bot.")
+        pass
     try:
         driver.find_elements_by_css_selector(".btn-primary")[3].click()
         time.sleep(1)
@@ -790,11 +803,18 @@ def barbara(name, pw, email, first, last, number, ssn, street, city, zipcode):
         pass
 # collage auswahl
     collage = Select(driver.find_element_by_id('inputCollegeId'))
-    time.sleep(484)
+    time.sleep(1)
     collage.select_by_value('651')
     driver.find_element_by_id("beginApplicationButton").click()
-    time.sleep(4)
+    time.sleep(1)
 # enrollment
+    try:
+        element = WebDriverWait(driver, 60).until(
+            EC.presence_of_element_located((By.ID, "inputEduGoal"))
+        )
+    except:
+        print("Unable to open enrollment page, restarting bot.")
+        pass
     driver.find_elements_by_tag_name("option")[1].click()
     time.sleep(0.5)
     collage = Select(driver.find_element_by_id('inputEduGoal'))
@@ -804,6 +824,13 @@ def barbara(name, pw, email, first, last, number, ssn, street, city, zipcode):
     driver.find_element_by_name("_eventId_continue").click()
     time.sleep(2)
 # account info
+    try:
+        element = WebDriverWait(driver, 60).until(
+            EC.presence_of_element_located((By.ID, "inputStreetAddress1"))
+        )
+    except:
+        print("Unable to open account info page, restarting bot.")
+        pass
     driver.find_element_by_id("inputStreetAddress1").send_keys(street)
     driver.find_element_by_id("inputCity").send_keys(city)
     state = Select(driver.find_element_by_id('inputState'))
@@ -818,23 +845,44 @@ def barbara(name, pw, email, first, last, number, ssn, street, city, zipcode):
         driver.find_element_by_id("inputAddressValidationOverride").click()
         driver.find_element_by_name("_eventId_continue").click()
 # education
+    try:
+        element = WebDriverWait(driver, 60).until(
+            EC.presence_of_element_located((By.ID, "inputHsAttendance3"))
+        )
+    except:
+        print("Unable to open education page, restarting bot.")
+        pass
     driver.find_elements_by_tag_name("option")[1].click()
     time.sleep(1)
     driver.find_elements_by_tag_name("option")[9].click()
     driver.find_element_by_id("inputHsAttendance3").click()
     driver.find_element_by_name("_eventId_continue").click()
 # military
+    try:
+        element = WebDriverWait(driver, 60).until(
+            EC.presence_of_element_located((By.ID, "inputMilitaryStatus"))
+        )
+    except:
+        print("Unable to open military page, restarting bot.")
+        pass
     driver.find_elements_by_tag_name("option")[1].click()
     time.sleep(1)
     s2 = Select(driver.find_element_by_id('inputMilitaryStatus'))
     s2.select_by_value('1')
-    time.sleep(4.5)
+    time.sleep(1)
     driver.find_element_by_name("_eventId_continue").click()
     driver.find_element_by_id("inputCaRes2YearsYes").click()
     driver.find_element_by_id("inputIsEverInFosterCareNo").click()
-    time.sleep(4.5)
+    time.sleep(1)
     driver.find_element_by_name("_eventId_continue").click()
 # needs
+    try:
+        element = WebDriverWait(driver, 60).until(
+            EC.presence_of_element_located((By.ID, "inputEnglishYes"))
+        )
+    except:
+        print("Unable to open needs page, restarting bot.")
+        pass
     driver.find_element_by_id("inputEnglishYes").click()
     driver.find_element_by_id("inputFinAidInfoNo").click()
     time.sleep(1)
@@ -843,42 +891,55 @@ def barbara(name, pw, email, first, last, number, ssn, street, city, zipcode):
     time.sleep(1)
     driver.find_element_by_name("_eventId_continue").click()
 # demographic
+    try:
+        element = WebDriverWait(driver, 60).until(
+            EC.presence_of_element_located((By.ID, "inputGender"))
+        )
+    except:
+        print("Unable to open demographic page, restarting bot.")
+        pass
     gender = Select(driver.find_element_by_id('inputGender'))
     gender.select_by_value('Male')
     time.sleep(1)
 
     trans = Select(driver.find_element_by_id('inputTransgender'))
     trans.select_by_value('No')
-    time.sleep(4.5)
+    time.sleep(1)
     sexual = Select(driver.find_element_by_id('inputOrientation'))
     sexual.select_by_value('StraightHetrosexual')
 
     guard = Select(driver.find_element_by_id('inputParentGuardianEdu1'))
     guard.select_by_value('3')
-    time.sleep(1.5)
+    time.sleep(1)
     guard2 = Select(driver.find_element_by_id('inputParentGuardianEdu2'))
     guard2.select_by_value('Y')
 
     driver.find_element_by_id("inputHispanicNo").click()
 
     driver.find_element_by_id("inputRaceEthnicity800").click()
-    time.sleep(4.5)
+    time.sleep(1)
     driver.find_element_by_id("inputRaceEthnicity806").click()
-    time.sleep(1.5)
+    time.sleep(1)
     driver.find_element_by_name("_eventId_continue").click()
-    time.sleep(1.5)
+    time.sleep(1)
 # supplemental
-
+    try:
+        element = WebDriverWait(driver, 60).until(
+            EC.presence_of_element_located((By.ID, "_supp_MENU_1"))
+        )
+    except:
+        print("Unable to open supplemental page, restarting bot.")
+        pass
     supp1 = Select(driver.find_element_by_id('_supp_MENU_1'))
     supp1.select_by_value('15')
 
     supp2 = Select(driver.find_element_by_id('_supp_MENU_2'))
     supp2.select_by_value('01')
-    time.sleep(1.5)
+    time.sleep(1)
 
     supp3 = Select(driver.find_element_by_id('_supp_MENU_3'))
     supp3.select_by_value('7')
-    time.sleep(1.5)
+    time.sleep(1)
     supp5 = Select(driver.find_element_by_id('_supp_MENU_5'))
     supp5.select_by_value('Y')
 
@@ -886,13 +947,18 @@ def barbara(name, pw, email, first, last, number, ssn, street, city, zipcode):
     supp4.select_by_value('N')
 
     driver.find_element_by_name("_eventId_continue").click()
-    time.sleep(1.5)
+    time.sleep(1)
 
 # submisson
-
-    time.sleep(4.5)
+    try:
+        element = WebDriverWait(driver, 60).until(
+            EC.presence_of_element_located((By.ID, "inputConsentYes"))
+        )
+    except:
+        print("Unable to open submission page, restarting bot.")
+        pass
     driver.find_element_by_id("inputConsentYes").click()
-    time.sleep(3)
+    time.sleep(1)
 
     driver.find_element_by_id("inputESignature").click()
     driver.find_element_by_id("inputFinancialAidAck").click()
