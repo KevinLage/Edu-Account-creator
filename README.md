@@ -2,7 +2,15 @@
 
 ## How to use?
 1. Install Firefox (https://www.mozilla.org/en-US/firefox/new/)
-2. Download Geckodriver (https://github.com/mozilla/geckodriver/releases)
+2. Install Python and pip (https://docs.python-guide.org/starting/installation/#installation-guides and https://pip.pypa.io/en/stable/installing/#upgrading-pip)
+3. Install selenium
+   ```bash
+   pip install selenium
+   ```
+4. Run Edu Bot.py using python
+   ```bash
+   python "Edu Bot.py"
+   ```
 
 ## Why should i need it?
 
