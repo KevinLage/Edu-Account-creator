@@ -71,8 +71,9 @@ generated = 0
 def createaccount(collage,use_captcha):
     try:
         Bot(collage, use_captcha)
-    except:
-        createaccount(collage, use_captcha)
+    except Exception as E:
+        open("log.txt", "a+").write(str(E)+"\n")
+        print(E)
 
 def randomSSN(size=4, chars=string.digits):
     return ''.join(random.choice(chars) for i in range(size))
@@ -1997,7 +1998,7 @@ index = int(input("")) - 1
 
 print("[*] " + collages[index])
 
-#input()
+
 
 collage = str(index + 1)
 
