@@ -3,7 +3,6 @@ import platform
 import random
 import string
 import time
-
 import requests
 from selenium import webdriver
 from selenium.webdriver.common.by import By
@@ -163,30 +162,36 @@ def Bot(collage, use_captcha):
 
     register_button = driver.find_element_by_name("_eventId_continue")
     register_button.click()
-
+    try:
+        element = WebDriverWait(driver, 60).until(
+            EC.presence_of_element_located((By.ID, "accountFormSubmit"))
+        )
+    except:
+        print("Unable to open page 1, restarting bot.")
+        pass
     first_name = driver.find_element_by_name("firstName")
     first_name.send_keys(first)
-    time.sleep(4)
+    time.sleep(1)
     driver.find_element_by_id("inputHasNoMiddleName").click()
     last_name = driver.find_element_by_id("inputLastName")
     last_name.send_keys(last)
-    time.sleep(4)
+    time.sleep(1)
     prev_name = driver.find_element_by_id("hasOtherNameNo")
     prev_name.click()
     preffered_name = driver.find_element_by_id("hasPreferredNameNo")
     preffered_name.click()
-    time.sleep(4)
+    time.sleep(1)
 
     driver.find_elements_by_tag_name("option")[10].click()
     driver.find_elements_by_tag_name("option")[27].click()
     year = driver.find_element_by_name("birthDateModel.year")
     year.send_keys("1994")
-    time.sleep(4)
+    time.sleep(1)
     driver.find_elements_by_tag_name("option")[55].click()
     driver.find_elements_by_tag_name("option")[72].click()
-    time.sleep(4)
     year_confirm = driver.find_element_by_name("birthDateModel.yearConfirm")
     year_confirm.send_keys("1994")
+    time.sleep(1)
     driver.find_element_by_id("inputSSNTypeSSN").click()
     driver.find_element_by_id("inputSsn").send_keys(ssnlol)
     driver.find_element_by_id("inputSsnConfirm").send_keys(ssnlol)
@@ -195,18 +200,24 @@ def Bot(collage, use_captcha):
 
     print("[*] Page 1/3 Done!")
 
-    time.sleep(4)
+    try:
+        element = WebDriverWait(driver, 60).until(
+            EC.presence_of_element_located((By.ID, "inputPostalCode"))
+        )
+    except:
+        print("Unable to open page 2, restarting bot.")
+        pass
 
     driver.find_element_by_id("inputEmail").send_keys(email)
     driver.find_element_by_id("inputEmailConfirm").send_keys(email)
-    time.sleep(4)
+    time.sleep(1)
     driver.find_element_by_id("inputSmsPhone").send_keys(number)
     driver.find_element_by_id("inputStreetAddress1").send_keys(street)
     driver.find_element_by_id("inputCity").send_keys(city)
     state = Select(driver.find_element_by_id('inputState'))
     state.select_by_value('CA')
     driver.find_element_by_id("inputPostalCode").send_keys(zipcode)
-    time.sleep(4)
+    time.sleep(1)
     driver.find_element_by_id("accountFormSubmit").click()
 
     try:
@@ -218,6 +229,13 @@ def Bot(collage, use_captcha):
         driver.find_element_by_id("accountFormSubmit").click()
 
     print("[*] Page 2/3 Done!")
+    try:
+        element = WebDriverWait(driver, 60).until(
+            EC.presence_of_element_located((By.ID, "inputSecurityAnswer3"))
+        )
+    except:
+        print("Unable to open page 3, restarting bot.")
+        pass
     driver.find_element_by_id("inputUserId").send_keys(name)
     driver.find_element_by_id("inputPasswd").send_keys(pw)
     driver.find_element_by_id("inputPasswdConfirm").send_keys(pw)
@@ -268,6 +286,11 @@ def Bot(collage, use_captcha):
         driver.execute_script(command)
     elif use_captcha == "2":
         print("Solve the captcha now!\n\n")
+        try:
+            element = driver.find_element_by_id("accountFormSubmit")
+            driver.execute_script("arguments[0].scrollIntoView();", element)
+        except:
+            print("Failed to scroll")
         captcha_solved = "1"
         while captcha_solved == "1":
             captcha_solved = input("[Y]Solved?\n")
