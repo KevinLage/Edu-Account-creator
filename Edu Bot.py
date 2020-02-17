@@ -163,63 +163,132 @@ def Bot(collage, use_captcha):
 
     register_button = driver.find_element_by_name("_eventId_continue")
     register_button.click()
-    try:
-        element = WebDriverWait(driver, 60).until(
-            EC.presence_of_element_located((By.ID, "accountFormSubmit"))
-        )
-    except:
-        print("Unable to open page 1, restarting bot.")
-        pass
-    first_name = driver.find_element_by_name("firstName")
-    first_name.send_keys(first)
-    time.sleep(1)
-    driver.find_element_by_id("inputHasNoMiddleName").click()
-    last_name = driver.find_element_by_id("inputLastName")
-    last_name.send_keys(last)
-    time.sleep(1)
-    prev_name = driver.find_element_by_id("hasOtherNameNo")
-    prev_name.click()
-    preffered_name = driver.find_element_by_id("hasPreferredNameNo")
-    preffered_name.click()
-    time.sleep(1)
 
-    driver.find_elements_by_tag_name("option")[10].click()
-    driver.find_elements_by_tag_name("option")[27].click()
-    year = driver.find_element_by_name("birthDateModel.year")
-    year.send_keys("1994")
-    time.sleep(1)
-    driver.find_elements_by_tag_name("option")[55].click()
-    driver.find_elements_by_tag_name("option")[72].click()
-    year_confirm = driver.find_element_by_name("birthDateModel.yearConfirm")
-    year_confirm.send_keys("1994")
-    time.sleep(1)
-    driver.find_element_by_id("inputSSNTypeSSN").click()
-    driver.find_element_by_id("inputSsn").send_keys(ssnlol)
-    driver.find_element_by_id("inputSsnConfirm").send_keys(ssnlol)
-    time.sleep(1)
-    driver.find_element_by_id("accountFormSubmit").click()
+    # Page 1
+
+    first_name = WebDriverWait(driver, 60).until(
+        EC.presence_of_element_located((By.NAME, "firstName"))
+    )
+    first_name.send_keys(first)
+
+    no_middle_name = WebDriverWait(driver, 60).until(
+        EC.element_to_be_clickable((By.ID, "inputHasNoMiddleName"))
+    )
+    no_middle_name.click()
+
+    last_name = WebDriverWait(driver, 60).until(
+        EC.presence_of_element_located((By.ID, "inputLastName"))
+    )
+    last_name.send_keys(last)
+
+    prev_name = WebDriverWait(driver, 60).until(
+        EC.element_to_be_clickable((By.ID, "hasOtherNameNo"))
+    )
+    prev_name.click()
+
+    preffered_name = WebDriverWait(driver, 60).until(
+        EC.element_to_be_clickable((By.ID, "hasPreferredNameNo"))
+    )
+    preffered_name.click()
+
+    month_one = WebDriverWait(driver, 60).until(
+        EC.element_to_be_clickable(
+            (By.CSS_SELECTOR, '#inputBirthDateMonth option[value="3"]'))
+    )
+    month_one.click()
+
+    day_one = WebDriverWait(driver, 60).until(
+        EC.element_to_be_clickable(
+            (By.CSS_SELECTOR, '#inputBirthDateDay option[value="7"]'))
+    )
+    day_one.click()
+
+    year_one = WebDriverWait(driver, 60).until(
+        EC.presence_of_element_located((By.ID, 'inputBirthDateYear'))
+    )
+    year_one.send_keys("1994")
+
+    month_two = WebDriverWait(driver, 60).until(
+        EC.element_to_be_clickable(
+            (By.CSS_SELECTOR, '#inputBirthDateMonthConfirm option[value="3"]'))
+    )
+    month_two.click()
+
+    day_two = WebDriverWait(driver, 60).until(
+        EC.element_to_be_clickable(
+            (By.CSS_SELECTOR, '#inputBirthDateDayConfirm option[value="7"]'))
+    )
+    day_two.click()
+
+    year_two = WebDriverWait(driver, 60).until(
+        EC.presence_of_element_located((By.ID, 'inputBirthDateYearConfirm'))
+    )
+    year_two.send_keys("1994")
+
+    select_ssn = WebDriverWait(driver, 60).until(
+        EC.element_to_be_clickable((By.ID, 'inputSSNTypeSSN'))
+    )
+    select_ssn.click()
+
+    input_ssn = WebDriverWait(driver, 60).until(
+        EC.presence_of_element_located((By.ID, 'inputSsn'))
+    )
+    input_ssn.send_keys(ssnlol)
+
+    input_ssn_confirm = WebDriverWait(driver, 60).until(
+        EC.presence_of_element_located((By.ID, 'inputSsnConfirm'))
+    )
+    input_ssn_confirm.send_keys(ssnlol)
+
+    page_one_submit = WebDriverWait(driver, 60).until(
+        EC.element_to_be_clickable((By.ID, 'accountFormSubmit'))
+    )
+    page_one_submit.click()
 
     print("\n\n[*] Page 1/3 Done!")
 
-    try:
-        element = WebDriverWait(driver, 60).until(
-            EC.presence_of_element_located((By.ID, "inputPostalCode"))
-        )
-    except:
-        print("Unable to open page 2, restarting bot.")
-        pass
+    # Page 2
 
-    driver.find_element_by_id("inputEmail").send_keys(email)
-    driver.find_element_by_id("inputEmailConfirm").send_keys(email)
-    time.sleep(1)
-    driver.find_element_by_id("inputSmsPhone").send_keys(number)
-    driver.find_element_by_id("inputStreetAddress1").send_keys(street)
-    driver.find_element_by_id("inputCity").send_keys(city)
-    state = Select(driver.find_element_by_id('inputState'))
-    state.select_by_value('CA')
-    driver.find_element_by_id("inputPostalCode").send_keys(zipcode)
-    time.sleep(1)
-    driver.find_element_by_id("accountFormSubmit").click()
+    input_email = WebDriverWait(driver, 60).until(
+        EC.presence_of_element_located((By.ID, 'inputEmail'))
+    )
+    input_email.send_keys(email)
+
+    input_emailconfirm = WebDriverWait(driver, 60).until(
+        EC.presence_of_element_located((By.ID, 'inputEmailConfirm'))
+    )
+    input_emailconfirm.send_keys(email)
+
+    input_phone = WebDriverWait(driver, 60).until(
+        EC.presence_of_element_located((By.ID, 'inputSmsPhone'))
+    )
+    input_phone.send_keys(number)
+
+    input_street = WebDriverWait(driver, 60).until(
+        EC.presence_of_element_located((By.ID, 'inputStreetAddress1'))
+    )
+    input_street.send_keys(street)
+
+    input_city = WebDriverWait(driver, 60).until(
+        EC.presence_of_element_located((By.ID, 'inputCity'))
+    )
+    input_city.send_keys(city)
+
+    input_state = WebDriverWait(driver, 60).until(
+        EC.element_to_be_clickable(
+            (By.CSS_SELECTOR, '#inputState option[value="CA"]'))
+    )
+    input_state.click()
+
+    input_zipcode = WebDriverWait(driver, 60).until(
+        EC.presence_of_element_located((By.ID, 'inputPostalCode'))
+    )
+    input_zipcode.send_keys(zipcode)
+
+    page_two_submit = WebDriverWait(driver, 60).until(
+        EC.element_to_be_clickable((By.ID, 'accountFormSubmit'))
+    )
+    page_two_submit.click()
 
     try:
         driver.find_element_by_id("inputUserId").send_keys(name)
@@ -229,30 +298,63 @@ def Bot(collage, use_captcha):
         driver.find_element_by_id("accountFormSubmit").click()
 
     print("\n\n[*] Page 2/3 Done!")
-    try:
-        element = WebDriverWait(driver, 60).until(
-            EC.presence_of_element_located((By.ID, "inputSecurityAnswer3"))
-        )
-    except:
-        print("Unable to open page 3, restarting bot.")
-        pass
-    driver.find_element_by_id("inputUserId").send_keys(name)
-    driver.find_element_by_id("inputPasswd").send_keys(pw)
-    driver.find_element_by_id("inputPasswdConfirm").send_keys(pw)
 
-    driver.find_element_by_id("inputPin").send_keys("0420")
-    driver.find_element_by_id("inputPinConfirm").send_keys("0420")
+    input_userid = WebDriverWait(driver, 60).until(
+        EC.presence_of_element_located((By.ID, 'inputUserId'))
+    )
+    input_userid.send_keys(name)
 
-    driver.find_elements_by_tag_name("option")[10].click()
-    driver.find_element_by_id("inputSecurityAnswer1").send_keys("12")
+    input_pass = WebDriverWait(driver, 60).until(
+        EC.presence_of_element_located((By.ID, 'inputPasswd'))
+    )
+    input_pass.send_keys(pw)
 
-    driver.find_elements_by_tag_name("option")[25].click()
-    driver.find_element_by_id("inputSecurityAnswer2").send_keys("Josh")
+    input_passconf = WebDriverWait(driver, 60).until(
+        EC.presence_of_element_located((By.ID, 'inputPasswdConfirm'))
+    )
+    input_passconf.send_keys(pw)
 
-    driver.find_elements_by_tag_name("option")[42].click()
-    driver.find_element_by_id("inputSecurityAnswer3").send_keys("Tesla 3")
+    input_pin = WebDriverWait(driver, 60).until(
+        EC.presence_of_element_located((By.ID, 'inputPin'))
+    )
+    input_pin.send_keys("0420")
 
-    print("\n\n[*] Bypassing the Captcha!")
+    input_pinconf = WebDriverWait(driver, 60).until(
+        EC.presence_of_element_located((By.ID, 'inputPinConfirm'))
+    )
+    input_pinconf.send_keys("0420")
+
+    input_security1 = WebDriverWait(driver, 60).until(
+        EC.element_to_be_clickable(
+            (By.CSS_SELECTOR, '#inputSecurityQuestion1 option[value="10"]'))
+    )
+    input_security1.click()
+    input_answer1 = WebDriverWait(driver, 60).until(
+        EC.presence_of_element_located((By.ID, 'inputSecurityAnswer1'))
+    )
+    input_answer1.send_keys("12")
+
+    input_security2 = WebDriverWait(driver, 60).until(
+        EC.element_to_be_clickable(
+            (By.CSS_SELECTOR, '#inputSecurityQuestion2 option[value="4"]'))
+    )
+    input_security2.click()
+    input_answer2 = WebDriverWait(driver, 60).until(
+        EC.presence_of_element_located((By.ID, 'inputSecurityAnswer2'))
+    )
+    input_answer2.send_keys("Josh")
+
+    input_security3 = WebDriverWait(driver, 60).until(
+        EC.element_to_be_clickable(
+            (By.CSS_SELECTOR, '#inputSecurityQuestion3 option[value="2"]'))
+    )
+    input_security3.click()
+    input_answer3 = WebDriverWait(driver, 60).until(
+        EC.presence_of_element_located((By.ID, 'inputSecurityAnswer3'))
+    )
+    input_answer3.send_keys("Tesla 3")
+
+    print("\n\n[*] Bypassing the Captcha!\n\n")
 
     if use_captcha == "1":
 
@@ -270,7 +372,7 @@ def Bot(collage, use_captcha):
 
             url2 = "https://2captcha.com/res.php?key=" + captcha + "&action=get&id=" + moin
             r = requests.get(url2)
-            print("[*] Waiting for 2Captcha")
+            print("[*] Waiting for 2Captcha\n\n")
             time.sleep(3)
         try:
             _, key = r.text.split("|")
@@ -297,9 +399,9 @@ def Bot(collage, use_captcha):
     else:
         print("Error")
 
-    time.sleep(3)
+    time.sleep(2)
     driver.find_element_by_id("accountFormSubmit").click()
-    time.sleep(5)
+    time.sleep(2)
 
     print("\n\n[*] Page 3/3 Done!")
 
@@ -311,8 +413,6 @@ def Bot(collage, use_captcha):
         file.write("\n\n")
 
     print("\n\nYour openccc account has been created and is stored in openccc.txt and we will start filling college application now.\n\n")
-
-    time.sleep(3)
 
     onlyCollege(name, pw, email, first, last, number,
                 ssn, street, city, zipcode, collage)
