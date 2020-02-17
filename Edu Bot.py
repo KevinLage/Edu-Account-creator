@@ -299,6 +299,8 @@ def Bot(collage, use_captcha):
 
     print("\n\n[*] Page 2/3 Done!")
 
+    # Page 3
+
     input_userid = WebDriverWait(driver, 60).until(
         EC.presence_of_element_located((By.ID, 'inputUserId'))
     )
