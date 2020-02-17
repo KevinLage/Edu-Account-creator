@@ -358,12 +358,12 @@ def onlyCollege(name, pw, email, first, last, number, ssn, street, city, zipcode
 
     global generated
     generated += 1
-    with open("accountsb.txt", "a+") as file:
-        file.write(resp[0] + ":" + resp[1] + "  Email:" + resp[2] + " " +
-                   resp[3] + " " + resp[4] + " SSN: " + resp[5] + " number: " + resp[6])
-        file.write("\n")
+    with open("eduaccounts.txt", "a+") as file:
+        file.write("Username: " + resp[0] + ", Password: " + resp[1] + ",  Email:" + resp[2] + ", First Name: " +
+                   resp[3] + ", Last Name: " + resp[4] + ", SSN: " + resp[5] + ", Number: " + resp[6])
+        file.write("\n\n")
     print("\n\nSuccessfully created ", generated,
-          " student account(s), Please check accountsb.txt file for details. Wait a few days for college to accept your application, check your temp mail once in while.\n\n")
+          " student account(s), Please check eduaccounts.txt file for details. Wait a few days for college to accept your application, check your temp mail once in while.\n\n")
 
 
 def orange(name, pw, email, first, last, number, ssn, street, city, zipcode):
