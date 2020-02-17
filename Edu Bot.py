@@ -1848,7 +1848,7 @@ def Crafton(name, pw, email, first, last, number, ssn, street, city, zipcode):
     driver.execute_script(
         "arguments[0].checked = true;", radio1)
 
-    radio2 = driver.find_element_by_id("YESNO_3_yes")
+    radio2 = driver.find_element_by_id("YESNO_2_yes")
     driver.execute_script(
         "arguments[0].checked = true;", radio2)
 
