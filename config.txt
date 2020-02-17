@@ -1,2 +1,2 @@
-@tempr.email
+@brunhilde.ml
 2 captcha api key
