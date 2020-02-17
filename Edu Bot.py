@@ -1691,8 +1691,13 @@ def San_Bernardino(name, pw, email, first, last, number, ssn, street, city, zipc
     Parent = Select(driver.find_element_by_id('_supp_MENU_3'))
     Parent.select_by_value("Parent")
 
-    driver.find_element_by_id("YESNO_1_no").click()
-    driver.find_element_by_id("YESNO_3_yes").click()
+    radio1 = driver.find_element_by_id("YESNO_1_no")
+    driver.execute_script(
+        "arguments[0].checked = true;", radio1)
+
+    radio2 = driver.find_element_by_id("YESNO_3_yes")
+    driver.execute_script(
+        "arguments[0].checked = true;", radio2)
 
     driver.find_element_by_name("_eventId_continue").click()
 # submisson
@@ -1839,8 +1844,13 @@ def Crafton(name, pw, email, first, last, number, ssn, street, city, zipcode):
     Parent = Select(driver.find_element_by_id('_supp_MENU_3'))
     Parent.select_by_value("Parent")
 
-    driver.find_element_by_id("YESNO_1_no").click()
-    driver.find_element_by_id("YESNO_2_no").click()
+    radio1 = driver.find_element_by_id("YESNO_1_no")
+    driver.execute_script(
+        "arguments[0].checked = true;", radio1)
+
+    radio2 = driver.find_element_by_id("YESNO_3_yes")
+    driver.execute_script(
+        "arguments[0].checked = true;", radio2)
 
     driver.find_element_by_name("_eventId_continue").click()
 # submisson
