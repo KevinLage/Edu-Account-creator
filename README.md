@@ -10,6 +10,8 @@
 4. Run Edu Bot.py using python
    ```bash
    python "Edu Bot.py"
+   or py "Edu Bot.py"
+   or python3 "Edu Bot.py"
    ```
 
 ## Why should i need it?
