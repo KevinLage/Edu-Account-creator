@@ -1,3 +1,4 @@
+# -*- coding: UTF-8 -*-
 import hashlib
 import platform
 import random
@@ -67,7 +68,7 @@ class FakeNameGenerator():
         self.cardtype = self.html.split(
             '<h3 class="hh3">Finance</h3>')[1].split('<dt>')[1].split('</dt>')[0]
         self.card = self.html.split(
-            f"<dt>{self.cardtype}</dt>")[1].split("</dd>")[0].split("<dd>")[1]
+            "<dt>{self.cardtype}</dt>")[1].split("</dd>")[0].split("<dd>")[1]
         self.exp = self.html.split(
             "<dt>Expires</dt>")[1].split("</dd>")[0].split("<dd>")[1]
         try:
