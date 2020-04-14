@@ -1,3 +1,4 @@
+# -*- coding: UTF-8 -*-
 import hashlib
 import platform
 import random
