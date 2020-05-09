@@ -17,7 +17,7 @@ class FakeNameGenerator():
     def __init__(self):
         self.html = ""
 
-    def GenerateIdenity(self):
+    def GenerateIdentity(self):
         self.html = requests.get("https://www.fakenamegenerator.com/", headers={
                                  "User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:70.0) Gecko/20100101 Firefox/70.0"}).text
         self.name = {"completename": self.html.split('<div class="address">')[1].split('<h3>')[1].split('</h3>')[0], "first": self.html.split('<div class="address">')[
