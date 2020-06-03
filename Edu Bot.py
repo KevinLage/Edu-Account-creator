@@ -2319,7 +2319,7 @@ by Exploit forked and fixed by pixelcookie11\n"""
 
 accounts = int(input("How many Accounts do you want?\n"))
 
-use_captcha = input("1. 2Captcha \n2. Manually\n")
+use_captcha = input("\nWhich captcha service do you want to use?\n1. 2Captcha (Needs API Key) \n2. None (Manual)\n")
 if use_captcha == "1":
     print("2Captcha!\n")
 elif use_captcha == "2":
