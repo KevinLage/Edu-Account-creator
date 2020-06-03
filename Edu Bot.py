@@ -160,7 +160,7 @@ def Bot(collage, use_captcha):
 
     ssnlol = ssn
 
-    register_button = driver.find_element_by_name("_eventId_continue")
+    register_button = driver.find_element_by_id("accountFormSubmit")
     register_button.click()
 
     # Page 1
@@ -225,17 +225,17 @@ def Bot(collage, use_captcha):
     year_two.send_keys("1994")
 
     select_ssn = WebDriverWait(driver, 60).until(
-        EC.element_to_be_clickable((By.ID, 'inputSSNTypeSSN'))
+        EC.element_to_be_clickable((By.ID, '-have-ssn-yes'))
     )
     select_ssn.click()
 
     input_ssn = WebDriverWait(driver, 60).until(
-        EC.presence_of_element_located((By.ID, 'inputSsn'))
+        EC.presence_of_element_located((By.ID, '-ssn-input1'))
     )
     input_ssn.send_keys(ssnlol)
 
     input_ssn_confirm = WebDriverWait(driver, 60).until(
-        EC.presence_of_element_located((By.ID, 'inputSsnConfirm'))
+        EC.presence_of_element_located((By.ID, '-ssn-input2'))
     )
     input_ssn_confirm.send_keys(ssnlol)
 
@@ -292,7 +292,7 @@ def Bot(collage, use_captcha):
     try:
         driver.find_element_by_id("inputUserId").send_keys(name)
     except:
-        driver.find_element_by_id("error-modal-ok-button").click()
+        driver.find_element_by_id("messageFooterLabel").click()
         driver.find_element_by_id("inputAddressValidationOverride").click()
         driver.find_element_by_id("accountFormSubmit").click()
 
@@ -473,7 +473,7 @@ def orange(name, pw, email, first, last, number, ssn, street, city, zipcode):
     driver.get(
         "https://www.opencccapply.net/uPortal/f/u63l1s1000/normal/render.uP")
     time.sleep(1)
-    driver.find_element_by_id("portal-sign-in-link").click()
+    driver.find_element_by_id("loginTab").click()
     try:
         element = WebDriverWait(driver, 60).until(
             EC.presence_of_element_located((By.ID, "inputJUsername"))
@@ -678,7 +678,7 @@ def gavilan(name, pw, email, first, last, number, ssn, street, city, zipcode):
     driver.get(
         "https://www.opencccapply.net/uPortal/f/u63l1s1000/normal/render.uP")
     time.sleep(1)
-    driver.find_element_by_id("portal-sign-in-link").click()
+    driver.find_element_by_id("loginTab").click()
     try:
         element = WebDriverWait(driver, 60).until(
             EC.presence_of_element_located((By.ID, "inputJUsername"))
@@ -888,7 +888,7 @@ def barbara(name, pw, email, first, last, number, ssn, street, city, zipcode):
     driver.get(
         "https://www.opencccapply.net/uPortal/f/u63l1s1000/normal/render.uP")
     time.sleep(1)
-    driver.find_element_by_id("portal-sign-in-link").click()
+    driver.find_element_by_id("loginTab").click()
     try:
         element = WebDriverWait(driver, 60).until(
             EC.presence_of_element_located((By.ID, "inputJUsername"))
@@ -1100,7 +1100,7 @@ def Canada(name, pw, email, first, last, number, ssn, street, city, zipcode):
     driver.get(
         "https://www.opencccapply.net/uPortal/f/u63l1s1000/normal/render.uP")
     time.sleep(1)
-    driver.find_element_by_id("portal-sign-in-link").click()
+    driver.find_element_by_id("loginTab").click()
     try:
         element = WebDriverWait(driver, 60).until(
             EC.presence_of_element_located((By.ID, "inputJUsername"))
@@ -1286,7 +1286,7 @@ def Solano(name, pw, email, first, last, number, ssn, street, city, zipcode):
     driver.get(
         "https://www.opencccapply.net/uPortal/f/u63l1s1000/normal/render.uP")
     time.sleep(1)
-    driver.find_element_by_id("portal-sign-in-link").click()
+    driver.find_element_by_id("loginTab").click()
     try:
         element = WebDriverWait(driver, 60).until(
             EC.presence_of_element_located((By.ID, "inputJUsername"))
@@ -1480,7 +1480,7 @@ def ccsf(name, pw, email, first, last, number, ssn, street, city, zipcode):
     driver.get(
         "https://www.opencccapply.net/uPortal/f/u63l1s1000/normal/render.uP")
     time.sleep(1)
-    driver.find_element_by_id("portal-sign-in-link").click()
+    driver.find_element_by_id("loginTab").click()
     try:
         element = WebDriverWait(driver, 60).until(
             EC.presence_of_element_located((By.ID, "inputJUsername"))
@@ -1681,7 +1681,7 @@ def San_Bernardino(name, pw, email, first, last, number, ssn, street, city, zipc
     driver.get(
         "https://www.opencccapply.net/uPortal/f/u63l1s1000/normal/render.uP")
     time.sleep(1)
-    driver.find_element_by_id("portal-sign-in-link").click()
+    driver.find_element_by_id("loginTab").click()
     driver.find_element_by_id("inputJUsername").send_keys(name)
     time.sleep(1)
     driver.find_element_by_id("inputJPassword").send_keys(pw)
@@ -1833,7 +1833,7 @@ def Crafton(name, pw, email, first, last, number, ssn, street, city, zipcode):
     driver.get(
         "https://www.opencccapply.net/uPortal/f/u63l1s1000/normal/render.uP")
     time.sleep(1)
-    driver.find_element_by_id("portal-sign-in-link").click()
+    driver.find_element_by_id("loginTab").click()
     driver.find_element_by_id("inputJUsername").send_keys(name)
     time.sleep(1)
     driver.find_element_by_id("inputJPassword").send_keys(pw)
@@ -1986,7 +1986,7 @@ def Santa_Monica(name, pw, email, first, last, number, ssn, street, city, zipcod
     driver.get(
         "https://www.opencccapply.net/uPortal/f/u63l1s1000/normal/render.uP")
     time.sleep(1)
-    driver.find_element_by_id("portal-sign-in-link").click()
+    driver.find_element_by_id("loginTab").click()
     driver.find_element_by_id("inputJUsername").send_keys(name)
     time.sleep(1)
     driver.find_element_by_id("inputJPassword").send_keys(pw)
@@ -2127,7 +2127,7 @@ def Coastline(name, pw, email, first, last, number, ssn, street, city, zipcode):
     driver.get(
         "https://www.opencccapply.net/uPortal/f/u63l1s1000/normal/render.uP")
 
-    driver.find_element_by_id("portal-sign-in-link").click()
+    driver.find_element_by_id("loginTab").click()
     driver.find_element_by_id("inputJUsername").send_keys(name)
     time.sleep(1)
     driver.find_element_by_id("inputJPassword").send_keys(pw)
