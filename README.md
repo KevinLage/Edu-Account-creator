@@ -1,5 +1,7 @@
 # Edu Account creator
 
+## I dont maintain the project anymore! Im planning to release a version WITHOUT selenium and requests only soon, so it will get way faster!
+
 ## How to use?
 1. Install Firefox (https://www.mozilla.org/en-US/firefox/new/)
 2. Install Python and pip (https://docs.python-guide.org/starting/installation/#installation-guides and https://pip.pypa.io/en/stable/installing/#upgrading-pip)
