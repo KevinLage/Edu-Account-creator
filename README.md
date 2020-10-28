@@ -13,4 +13,5 @@
    or py "Edu Bot.py"
    or python3 "Edu Bot.py"
    ```
+   ## When you get to the login page make sure to click "Try Again" otherwise it will fail.
 5. Go to tempr.email and check the generated email.
