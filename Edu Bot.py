@@ -470,6 +470,7 @@ def onlyCollege(name, pw, email, first, last, number, ssn, street, city, zipcode
 def orange(name, pw, email, first, last, number, ssn, street, city, zipcode):
 
     driver = webdriver.Firefox(executable_path=geckopath)
+    
     driver.get(
         "https://www.opencccapply.net/uPortal/f/u63l1s1000/normal/render.uP")
     time.sleep(1)
@@ -485,6 +486,7 @@ def orange(name, pw, email, first, last, number, ssn, street, city, zipcode):
     time.sleep(1)
     driver.find_element_by_id("inputJPassword").send_keys(pw)
     driver.find_element_by_name("_eventId_proceed").click()
+    driver.reload()
     try:
         element = WebDriverWait(driver, 60).until(
             EC.presence_of_element_located((By.ID, "beginApplicationButton"))
@@ -690,6 +692,7 @@ def gavilan(name, pw, email, first, last, number, ssn, street, city, zipcode):
     time.sleep(1)
     driver.find_element_by_id("inputJPassword").send_keys(pw)
     driver.find_element_by_name("_eventId_proceed").click()
+    driver.reload()
     try:
         element = WebDriverWait(driver, 60).until(
             EC.presence_of_element_located((By.ID, "beginApplicationButton"))
@@ -900,6 +903,7 @@ def barbara(name, pw, email, first, last, number, ssn, street, city, zipcode):
     time.sleep(1)
     driver.find_element_by_id("inputJPassword").send_keys(pw)
     driver.find_element_by_name("_eventId_proceed").click()
+    driver.reload()
     try:
         element = WebDriverWait(driver, 60).until(
             EC.presence_of_element_located((By.ID, "beginApplicationButton"))
@@ -1112,6 +1116,7 @@ def Canada(name, pw, email, first, last, number, ssn, street, city, zipcode):
     time.sleep(1)
     driver.find_element_by_id("inputJPassword").send_keys(pw)
     driver.find_element_by_name("_eventId_proceed").click()
+    driver.reload()
     try:
         element = WebDriverWait(driver, 60).until(
             EC.presence_of_element_located((By.ID, "beginApplicationButton"))
@@ -1298,6 +1303,7 @@ def Solano(name, pw, email, first, last, number, ssn, street, city, zipcode):
     time.sleep(1)
     driver.find_element_by_id("inputJPassword").send_keys(pw)
     driver.find_element_by_name("_eventId_proceed").click()
+    driver.reload()
     try:
         element = WebDriverWait(driver, 60).until(
             EC.presence_of_element_located((By.ID, "beginApplicationButton"))
@@ -1492,6 +1498,7 @@ def ccsf(name, pw, email, first, last, number, ssn, street, city, zipcode):
     time.sleep(1)
     driver.find_element_by_id("inputJPassword").send_keys(pw)
     driver.find_element_by_name("_eventId_proceed").click()
+    driver.reload()
     try:
         element = WebDriverWait(driver, 60).until(
             EC.presence_of_element_located((By.ID, "beginApplicationButton"))
@@ -1991,6 +1998,7 @@ def Santa_Monica(name, pw, email, first, last, number, ssn, street, city, zipcod
     time.sleep(1)
     driver.find_element_by_id("inputJPassword").send_keys(pw)
     driver.find_element_by_name("_eventId_proceed").click()
+    driver.reload()
     time.sleep(3)
     try:
         driver.find_elements_by_css_selector(".btn-primary")[3].click()
@@ -2132,6 +2140,7 @@ def Coastline(name, pw, email, first, last, number, ssn, street, city, zipcode):
     time.sleep(1)
     driver.find_element_by_id("inputJPassword").send_keys(pw)
     driver.find_element_by_name("_eventId_proceed").click()
+    driver.reload()
     time.sleep(3)
     try:
         driver.find_elements_by_css_selector(".btn-primary")[3].click()
