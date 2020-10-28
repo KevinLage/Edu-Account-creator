@@ -1,5 +1,5 @@
 # EDU Account Creator
-
+# Warning: this code is really bad.
 ## Usage
 1. Install Firefox (https://www.mozilla.org/en-US/firefox/new/)
 2. Install Python and pip (https://docs.python-guide.org/starting/installation/#installation-guides and https://pip.pypa.io/en/stable/installing/#upgrading-pip)
